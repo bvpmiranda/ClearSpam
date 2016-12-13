@@ -683,17 +683,18 @@ namespace ClearSpam
 			e.Cancel = true;
 
 			Hide();
+			ShowInTaskbar = false;
 		}
 
 		private void NotifyIcon_DoubleClick(object sender, EventArgs e)
 		{
-			if (!Visible)
-				Show();
-			else if (WindowState == FormWindowState.Minimized)
-			{
+			if (WindowState == FormWindowState.Minimized)
 				WindowState = FormWindowState.Normal;
-				Focus();
-			}
+			else
+				Show();
+
+			Activate();
+			ShowInTaskbar = true;
 		}
 
 		private void processRulesToolStripMenuItem_Click(object sender, EventArgs e)
