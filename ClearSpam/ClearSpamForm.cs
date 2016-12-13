@@ -710,5 +710,10 @@ namespace ClearSpam
 		{
 			Process.Start(e.Link.LinkData as string);
 		}
+
+		private void ProcessRulesTimer_Tick(object sender, EventArgs e)
+		{
+			ProcessRules();
+		}
 	}
 }

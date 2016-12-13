@@ -866,6 +866,10 @@
 			// 
 			this.fieldTableAdapter.ClearBeforeFill = true;
 			// 
+			// ProcessRulesTimer
+			// 
+			this.ProcessRulesTimer.Tick += new System.EventHandler(this.ProcessRulesTimer_Tick);
+			// 
 			// tableLayoutPanel1
 			// 
 			this.tableLayoutPanel1.ColumnCount = 3;
