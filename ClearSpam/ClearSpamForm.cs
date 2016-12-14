@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using S22.Imap;
 using System.Net.Mail;
 using System.Diagnostics;
+using System.Collections.Specialized;
 
 namespace ClearSpam
 {
@@ -16,8 +17,9 @@ namespace ClearSpam
 		private enum field
 		{
 			from = 1,
-			header = 2,
-			to = 3
+			replyTo = 2,
+			subject = 3,
+			to = 4
 		}
 
 		public ClearSpamForm()
@@ -278,7 +280,7 @@ namespace ClearSpam
 
 			if (String.IsNullOrWhiteSpace(ServerTextBox.Text))
 			{
-				ServerTextBox.BackColor = Color.MistyRose ;
+				ServerTextBox.BackColor = Color.MistyRose;
 
 				if (focusedControl == null)
 					focusedControl = ServerTextBox;
@@ -525,6 +527,7 @@ namespace ClearSpam
 
 		#endregion
 
+		#region Process Rules
 
 		private void ProcessRulesButton_Click(object sender, EventArgs e)
 		{
@@ -537,7 +540,7 @@ namespace ClearSpam
 
 			this.Enabled = false;
 			this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-			ContextMenuStrip.Enabled = false;
+			contextMenuStrip.Enabled = false;
 
 			int accountsCount = clearSpamDataSet.Account.Count;
 
@@ -555,7 +558,7 @@ namespace ClearSpam
 				Application.DoEvents();
 			}
 
-			ContextMenuStrip.Enabled = true;
+			contextMenuStrip.Enabled = true;
 			this.Cursor = System.Windows.Forms.Cursors.Default;
 			this.Enabled = true;
 
@@ -591,10 +594,10 @@ namespace ClearSpam
 					{
 						message = ic.GetMessage(messages[m], false);
 
-							if (ProcessRules(message, rules))
-							{
-								ic.MoveMessage(messages[m], account.TrashMailBox);
-							}
+						if (ProcessRules(message, rules))
+						{
+							ic.MoveMessage(messages[m], account.TrashMailBox);
+						}
 
 						RulesProgressBar.Value += 1;
 
@@ -631,8 +634,12 @@ namespace ClearSpam
 						ret = ProcessMessageFrom(message, r.Content);
 						break;
 
-					case (int)field.header:
-						ret = ProcessMessageHeader(message, r.Content);
+					case (int)field.replyTo:
+						ret = ProcessMessageReplyTo(message, r.Content);
+						break;
+
+					case (int)field.subject:
+						ret = ProcessMessageSubject(message, r.Content);
 						break;
 
 					case (int)field.to:
@@ -657,14 +664,9 @@ namespace ClearSpam
 			return false;
 		}
 
-		private bool ProcessMessageHeader(MailMessage message, string content)
+		private bool ProcessMessageReplyTo(MailMessage message, string content)
 		{
-			return false;
-		}
-
-		private bool ProcessMessageTo(MailMessage message, string content)
-		{
-			foreach (System.Net.Mail.MailAddress ma in message.To)
+			foreach (MailAddress ma in message.ReplyToList)
 			{
 				if (ma.Address.Contains(content) || ma.DisplayName.Contains(content))
 				{
@@ -674,6 +676,33 @@ namespace ClearSpam
 
 			return false;
 		}
+
+		private bool ProcessMessageSubject(MailMessage message, string content)
+		{
+			if (message.Subject.Contains(content))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		private bool ProcessMessageTo(MailMessage message, string content)
+		{
+			foreach (MailAddress ma in message.To)
+			{
+				if (ma.Address.Contains(content) || ma.DisplayName.Contains(content))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		#endregion
+
+		#region Notifications Icon
 
 		private void ClearSpamForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
@@ -707,6 +736,8 @@ namespace ClearSpam
 			Application.Exit();
 		}
 
+		#endregion
+
 		private void IconCreditsLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			Process.Start(e.Link.LinkData as string);
@@ -716,5 +747,6 @@ namespace ClearSpam
 		{
 			ProcessRules();
 		}
+
 	}
 }

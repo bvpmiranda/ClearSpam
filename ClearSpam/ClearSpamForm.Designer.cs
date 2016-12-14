@@ -101,7 +101,7 @@
 			this.RulesProgressBar = new System.Windows.Forms.ProgressBar();
 			this.IconCreditsLinkLabel = new System.Windows.Forms.LinkLabel();
 			this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-			this.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.processRulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,7 +125,7 @@
 			this.CancelSaveRulePanel.SuspendLayout();
 			this.NewEditDeleteRulePanel.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
-			this.ContextMenuStrip.SuspendLayout();
+			this.contextMenuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// ClearSpamTabControl
@@ -919,37 +919,37 @@
 			// NotifyIcon
 			// 
 			this.NotifyIcon.BalloonTipTitle = "Clear Spam";
-			this.NotifyIcon.ContextMenuStrip = this.ContextMenuStrip;
+			this.NotifyIcon.ContextMenuStrip = this.contextMenuStrip;
 			this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
 			this.NotifyIcon.Text = "Clear Spam";
 			this.NotifyIcon.Visible = true;
 			this.NotifyIcon.DoubleClick += new System.EventHandler(this.NotifyIcon_DoubleClick);
 			// 
-			// ContextMenuStrip
+			// contextMenuStrip
 			// 
-			this.ContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.processRulesToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
-			this.ContextMenuStrip.Name = "ContextMenuStrip";
-			this.ContextMenuStrip.Size = new System.Drawing.Size(146, 54);
+			this.contextMenuStrip.Name = "ContextMenuStrip";
+			this.contextMenuStrip.Size = new System.Drawing.Size(153, 76);
 			// 
 			// processRulesToolStripMenuItem
 			// 
 			this.processRulesToolStripMenuItem.Name = "processRulesToolStripMenuItem";
-			this.processRulesToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+			this.processRulesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.processRulesToolStripMenuItem.Text = "&Process Rules";
 			this.processRulesToolStripMenuItem.Click += new System.EventHandler(this.processRulesToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(142, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.exitToolStripMenuItem.Text = "E&xit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
@@ -994,7 +994,7 @@
 			this.NewEditDeleteRulePanel.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
-			this.ContextMenuStrip.ResumeLayout(false);
+			this.contextMenuStrip.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -1071,7 +1071,7 @@
 		private System.Windows.Forms.ProgressBar AccountsProgressBar;
 		private System.Windows.Forms.ProgressBar RulesProgressBar;
 		private System.Windows.Forms.NotifyIcon NotifyIcon;
-		private System.Windows.Forms.ContextMenuStrip ContextMenuStrip;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem processRulesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
