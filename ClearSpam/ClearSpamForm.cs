@@ -617,9 +617,25 @@ namespace ClearSpam
 			}
 			finally
 			{
-				ic.Logout();
-
-				ic.Dispose();
+				try
+				{
+					ic.Logout();
+				}
+				catch (Exception ex)
+				{
+					var message = ex.Message;
+				}
+				finally
+				{
+					try
+					{
+						ic.Dispose();
+					}
+					catch (Exception ex)
+					{
+						var message = ex.Message;
+					}
+				}
 			}
 		}
 
@@ -687,8 +703,8 @@ namespace ClearSpam
 			byte[] subjectBytes = Encoding.Convert(contentEncoding, subjectEncoding, contentBytes);
 
 			string subject = subjectEncoding.GetString(subjectBytes);
-			
-			if (message.Subject .Contains(subject))
+
+			if (message.Subject.Contains(subject))
 			{
 				return true;
 			}
