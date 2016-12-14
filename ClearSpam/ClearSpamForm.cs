@@ -7,6 +7,7 @@ using S22.Imap;
 using System.Net.Mail;
 using System.Diagnostics;
 using System.Collections.Specialized;
+using System.Text;
 
 namespace ClearSpam
 {
@@ -679,7 +680,15 @@ namespace ClearSpam
 
 		private bool ProcessMessageSubject(MailMessage message, string content)
 		{
-			if (message.Subject.Contains(content))
+			Encoding contentEncoding = Encoding.UTF8;
+			byte[] contentBytes = contentEncoding.GetBytes(content);
+
+			Encoding subjectEncoding = message.SubjectEncoding;
+			byte[] subjectBytes = Encoding.Convert(contentEncoding, subjectEncoding, contentBytes);
+
+			string subject = subjectEncoding.GetString(subjectBytes);
+			
+			if (message.Subject .Contains(subject))
 			{
 				return true;
 			}
