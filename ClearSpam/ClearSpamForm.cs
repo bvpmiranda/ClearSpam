@@ -663,24 +663,9 @@ namespace ClearSpam
 
 		private bool ProcessMessageFrom(MailMessage message, string content)
 		{
-			if (message.From != null)
-			{
-				if (message.From.Address.Contains(content) || message.From.DisplayName.Contains(content))
-				{
-					return true;
-				}
-			}
-			else
-			{
-				string from = String.Join("", message.Headers.GetValues("From"));
+			string from = String.Join("", message.Headers.GetValues("From")).Replace("\"", "");
 
-				if (from.Contains(content))
-				{
-					return true;
-				}
-			}
-
-			if (message.From != null && (message.From.Address.Contains(content) || message.From.DisplayName.Contains(content)))
+			if (from.Contains(content))
 			{
 				return true;
 			}
