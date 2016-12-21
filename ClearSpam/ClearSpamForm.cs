@@ -125,16 +125,6 @@ namespace ClearSpam
 
 				ClearSpamDataSet.AccountRow account = ((DataRowView)AccountsBindingSource.Current).Row as ClearSpamDataSet.AccountRow;
 
-				ClearSpamDataSet.RuleRow[] rules = clearSpamDataSet.Rule.Where(r => r.AccountId == account.Id).ToArray();
-				ClearSpamDataSet.RuleRow rule;
-
-				for (int r = 0; r < rules.Count(); r++)
-				{
-					rule = rules[r];
-
-					ruleTableAdapter.Delete(rule.Id, rule.AccountId, rule.FieldId, rule.Content);
-				}
-
 				AccountsBindingSource.RemoveCurrent();
 				accountTableAdapter.Update(clearSpamDataSet.Account);
 
@@ -673,7 +663,24 @@ namespace ClearSpam
 
 		private bool ProcessMessageFrom(MailMessage message, string content)
 		{
-			if (message.From.Address.Contains(content) || message.From.DisplayName.Contains(content))
+			if (message.From != null)
+			{
+				if (message.From.Address.Contains(content) || message.From.DisplayName.Contains(content))
+				{
+					return true;
+				}
+			}
+			else
+			{
+				string from = String.Join("", message.Headers.GetValues("From"));
+
+				if (from.Contains(content))
+				{
+					return true;
+				}
+			}
+
+			if (message.From != null && (message.From.Address.Contains(content) || message.From.DisplayName.Contains(content)))
 			{
 				return true;
 			}
