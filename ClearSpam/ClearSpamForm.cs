@@ -603,7 +603,7 @@ namespace ClearSpam
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				//MessageBox.Show(ex.Message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			finally
 			{
