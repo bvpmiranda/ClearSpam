@@ -375,7 +375,7 @@ namespace ClearSpam {
             
             private global::System.Data.DataColumn columnPassword;
             
-            private global::System.Data.DataColumn columnSpamMailBox;
+            private global::System.Data.DataColumn columnWatchedMailbox;
             
             private global::System.Data.DataColumn columnTrashMailBox;
             
@@ -462,9 +462,9 @@ namespace ClearSpam {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SpamMailBoxColumn {
+            public global::System.Data.DataColumn WatchedMailboxColumn {
                 get {
-                    return this.columnSpamMailBox;
+                    return this.columnWatchedMailbox;
                 }
             }
             
@@ -513,7 +513,7 @@ namespace ClearSpam {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public AccountRow AddAccountRow(string Server, short Port, bool SSL, string Login, string Password, string SpamMailBox, string TrashMailBox) {
+            public AccountRow AddAccountRow(string Server, short Port, bool SSL, string Login, string Password, string WatchedMailbox, string TrashMailBox) {
                 AccountRow rowAccountRow = ((AccountRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -522,7 +522,7 @@ namespace ClearSpam {
                         SSL,
                         Login,
                         Password,
-                        SpamMailBox,
+                        WatchedMailbox,
                         TrashMailBox};
                 rowAccountRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowAccountRow);
@@ -559,7 +559,7 @@ namespace ClearSpam {
                 this.columnSSL = base.Columns["SSL"];
                 this.columnLogin = base.Columns["Login"];
                 this.columnPassword = base.Columns["Password"];
-                this.columnSpamMailBox = base.Columns["SpamMailBox"];
+                this.columnWatchedMailbox = base.Columns["WatchedMailbox"];
                 this.columnTrashMailBox = base.Columns["TrashMailBox"];
             }
             
@@ -578,8 +578,8 @@ namespace ClearSpam {
                 base.Columns.Add(this.columnLogin);
                 this.columnPassword = new global::System.Data.DataColumn("Password", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPassword);
-                this.columnSpamMailBox = new global::System.Data.DataColumn("SpamMailBox", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSpamMailBox);
+                this.columnWatchedMailbox = new global::System.Data.DataColumn("WatchedMailbox", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWatchedMailbox);
                 this.columnTrashMailBox = new global::System.Data.DataColumn("TrashMailBox", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTrashMailBox);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -598,8 +598,8 @@ namespace ClearSpam {
                 this.columnLogin.MaxLength = 255;
                 this.columnPassword.AllowDBNull = false;
                 this.columnPassword.MaxLength = 255;
-                this.columnSpamMailBox.AllowDBNull = false;
-                this.columnSpamMailBox.MaxLength = 255;
+                this.columnWatchedMailbox.AllowDBNull = false;
+                this.columnWatchedMailbox.MaxLength = 255;
                 this.columnTrashMailBox.AllowDBNull = false;
                 this.columnTrashMailBox.MaxLength = 255;
             }
@@ -1402,12 +1402,12 @@ namespace ClearSpam {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string SpamMailBox {
+            public string WatchedMailbox {
                 get {
-                    return ((string)(this[this.tableAccount.SpamMailBoxColumn]));
+                    return ((string)(this[this.tableAccount.WatchedMailboxColumn]));
                 }
                 set {
-                    this[this.tableAccount.SpamMailBoxColumn] = value;
+                    this[this.tableAccount.WatchedMailboxColumn] = value;
                 }
             }
             
@@ -1796,12 +1796,12 @@ namespace ClearSpam.ClearSpamDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("SSL", "SSL");
             tableMapping.ColumnMappings.Add("Login", "Login");
             tableMapping.ColumnMappings.Add("Password", "Password");
-            tableMapping.ColumnMappings.Add("SpamMailBox", "SpamMailBox");
+            tableMapping.ColumnMappings.Add("WatchedMailbox", "WatchedMailbox");
             tableMapping.ColumnMappings.Add("TrashMailBox", "TrashMailBox");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Account] WHERE (([Id] = @Original_Id) AND ([Server] = @Original_Server) AND ([Port] = @Original_Port) AND ([SSL] = @Original_SSL) AND ([Login] = @Original_Login) AND ([Password] = @Original_Password) AND ([SpamMailBox] = @Original_SpamMailBox) AND ([TrashMailBox] = @Original_TrashMailBox))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Account] WHERE (([Id] = @Original_Id) AND ([Server] = @Original_Server) AND ([Port] = @Original_Port) AND ([SSL] = @Original_SSL) AND ([Login] = @Original_Login) AND ([Password] = @Original_Password) AND ([WatchedMailbox] = @Original_WatchedMailbox) AND ([TrashMailBox] = @Original_TrashMailBox))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Server", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Server", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -1809,31 +1809,31 @@ namespace ClearSpam.ClearSpamDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SSL", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SSL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Login", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Password", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SpamMailBox", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SpamMailBox", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WatchedMailbox", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WatchedMailbox", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TrashMailBox", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TrashMailBox", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Account] ([Server], [Port], [SSL], [Login], [Password], [SpamMailBox], [TrashMailBox]) VALUES (@Server, @Port, @SSL, @Login, @Password, @SpamMailBox, @TrashMailBox);
-SELECT Id, Server, Port, SSL, Login, Password, SpamMailBox, TrashMailBox FROM Account WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Account] ([Server], [Port], [SSL], [Login], [Password], [WatchedMailbox], [TrashMailBox]) VALUES (@Server, @Port, @SSL, @Login, @Password, @WatchedMailbox, @TrashMailBox);
+SELECT Id, Server, Port, SSL, Login, Password, WatchedMailbox, TrashMailBox FROM Account WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Server", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Server", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Port", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Port", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SSL", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SSL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Login", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SpamMailBox", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SpamMailBox", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WatchedMailbox", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WatchedMailbox", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TrashMailBox", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TrashMailBox", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [Account] SET [Server] = @Server, [Port] = @Port, [SSL] = @SSL, [Login] = @Login, [Password] = @Password, [SpamMailBox] = @SpamMailBox, [TrashMailBox] = @TrashMailBox WHERE (([Id] = @Original_Id) AND ([Server] = @Original_Server) AND ([Port] = @Original_Port) AND ([SSL] = @Original_SSL) AND ([Login] = @Original_Login) AND ([Password] = @Original_Password) AND ([SpamMailBox] = @Original_SpamMailBox) AND ([TrashMailBox] = @Original_TrashMailBox));
-SELECT Id, Server, Port, SSL, Login, Password, SpamMailBox, TrashMailBox FROM Account WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Account] SET [Server] = @Server, [Port] = @Port, [SSL] = @SSL, [Login] = @Login, [Password] = @Password, [WatchedMailbox] = @WatchedMailbox, [TrashMailBox] = @TrashMailBox WHERE (([Id] = @Original_Id) AND ([Server] = @Original_Server) AND ([Port] = @Original_Port) AND ([SSL] = @Original_SSL) AND ([Login] = @Original_Login) AND ([Password] = @Original_Password) AND ([WatchedMailbox] = @Original_WatchedMailbox) AND ([TrashMailBox] = @Original_TrashMailBox));
+SELECT Id, Server, Port, SSL, Login, Password, WatchedMailbox, TrashMailBox FROM Account WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Server", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Server", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Port", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Port", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SSL", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SSL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Login", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SpamMailBox", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SpamMailBox", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WatchedMailbox", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WatchedMailbox", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TrashMailBox", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TrashMailBox", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Server", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Server", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -1841,7 +1841,7 @@ SELECT Id, Server, Port, SSL, Login, Password, SpamMailBox, TrashMailBox FROM Ac
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SSL", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SSL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Login", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Password", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SpamMailBox", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SpamMailBox", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WatchedMailbox", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WatchedMailbox", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TrashMailBox", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TrashMailBox", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -1920,7 +1920,7 @@ SELECT Id, Server, Port, SSL, Login, Password, SpamMailBox, TrashMailBox FROM Ac
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Id, string Original_Server, short Original_Port, bool Original_SSL, string Original_Login, string Original_Password, string Original_SpamMailBox, string Original_TrashMailBox) {
+        public virtual int Delete(int Original_Id, string Original_Server, short Original_Port, bool Original_SSL, string Original_Login, string Original_Password, string Original_WatchedMailbox, string Original_TrashMailBox) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
             if ((Original_Server == null)) {
                 throw new global::System.ArgumentNullException("Original_Server");
@@ -1942,11 +1942,11 @@ SELECT Id, Server, Port, SSL, Login, Password, SpamMailBox, TrashMailBox FROM Ac
             else {
                 this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_Password));
             }
-            if ((Original_SpamMailBox == null)) {
-                throw new global::System.ArgumentNullException("Original_SpamMailBox");
+            if ((Original_WatchedMailbox == null)) {
+                throw new global::System.ArgumentNullException("Original_WatchedMailbox");
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_SpamMailBox));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_WatchedMailbox));
             }
             if ((Original_TrashMailBox == null)) {
                 throw new global::System.ArgumentNullException("Original_TrashMailBox");
@@ -1974,7 +1974,7 @@ SELECT Id, Server, Port, SSL, Login, Password, SpamMailBox, TrashMailBox FROM Ac
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Server, short Port, bool SSL, string Login, string Password, string SpamMailBox, string TrashMailBox) {
+        public virtual int Insert(string Server, short Port, bool SSL, string Login, string Password, string WatchedMailbox, string TrashMailBox) {
             if ((Server == null)) {
                 throw new global::System.ArgumentNullException("Server");
             }
@@ -1995,11 +1995,11 @@ SELECT Id, Server, Port, SSL, Login, Password, SpamMailBox, TrashMailBox FROM Ac
             else {
                 this.Adapter.InsertCommand.Parameters[4].Value = ((string)(Password));
             }
-            if ((SpamMailBox == null)) {
-                throw new global::System.ArgumentNullException("SpamMailBox");
+            if ((WatchedMailbox == null)) {
+                throw new global::System.ArgumentNullException("WatchedMailbox");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(SpamMailBox));
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(WatchedMailbox));
             }
             if ((TrashMailBox == null)) {
                 throw new global::System.ArgumentNullException("TrashMailBox");
@@ -2033,7 +2033,7 @@ SELECT Id, Server, Port, SSL, Login, Password, SpamMailBox, TrashMailBox FROM Ac
                     bool SSL, 
                     string Login, 
                     string Password, 
-                    string SpamMailBox, 
+                    string WatchedMailbox, 
                     string TrashMailBox, 
                     int Original_Id, 
                     string Original_Server, 
@@ -2041,7 +2041,7 @@ SELECT Id, Server, Port, SSL, Login, Password, SpamMailBox, TrashMailBox FROM Ac
                     bool Original_SSL, 
                     string Original_Login, 
                     string Original_Password, 
-                    string Original_SpamMailBox, 
+                    string Original_WatchedMailbox, 
                     string Original_TrashMailBox, 
                     int Id) {
             if ((Server == null)) {
@@ -2064,11 +2064,11 @@ SELECT Id, Server, Port, SSL, Login, Password, SpamMailBox, TrashMailBox FROM Ac
             else {
                 this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Password));
             }
-            if ((SpamMailBox == null)) {
-                throw new global::System.ArgumentNullException("SpamMailBox");
+            if ((WatchedMailbox == null)) {
+                throw new global::System.ArgumentNullException("WatchedMailbox");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(SpamMailBox));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(WatchedMailbox));
             }
             if ((TrashMailBox == null)) {
                 throw new global::System.ArgumentNullException("TrashMailBox");
@@ -2097,11 +2097,11 @@ SELECT Id, Server, Port, SSL, Login, Password, SpamMailBox, TrashMailBox FROM Ac
             else {
                 this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_Password));
             }
-            if ((Original_SpamMailBox == null)) {
-                throw new global::System.ArgumentNullException("Original_SpamMailBox");
+            if ((Original_WatchedMailbox == null)) {
+                throw new global::System.ArgumentNullException("Original_WatchedMailbox");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_SpamMailBox));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_WatchedMailbox));
             }
             if ((Original_TrashMailBox == null)) {
                 throw new global::System.ArgumentNullException("Original_TrashMailBox");
@@ -2130,8 +2130,8 @@ SELECT Id, Server, Port, SSL, Login, Password, SpamMailBox, TrashMailBox FROM Ac
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Server, short Port, bool SSL, string Login, string Password, string SpamMailBox, string TrashMailBox, int Original_Id, string Original_Server, short Original_Port, bool Original_SSL, string Original_Login, string Original_Password, string Original_SpamMailBox, string Original_TrashMailBox) {
-            return this.Update(Server, Port, SSL, Login, Password, SpamMailBox, TrashMailBox, Original_Id, Original_Server, Original_Port, Original_SSL, Original_Login, Original_Password, Original_SpamMailBox, Original_TrashMailBox, Original_Id);
+        public virtual int Update(string Server, short Port, bool SSL, string Login, string Password, string WatchedMailbox, string TrashMailBox, int Original_Id, string Original_Server, short Original_Port, bool Original_SSL, string Original_Login, string Original_Password, string Original_WatchedMailbox, string Original_TrashMailBox) {
+            return this.Update(Server, Port, SSL, Login, Password, WatchedMailbox, TrashMailBox, Original_Id, Original_Server, Original_Port, Original_SSL, Original_Login, Original_Password, Original_WatchedMailbox, Original_TrashMailBox, Original_Id);
         }
     }
     

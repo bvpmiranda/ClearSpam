@@ -38,7 +38,7 @@
 			this.clearSpamDataSet = new ClearSpam.ClearSpamDataSet();
 			this.TrashMailBoxLabel = new System.Windows.Forms.Label();
 			this.TrashMailboxesButton = new System.Windows.Forms.Button();
-			this.SpamMailBoxLabel = new System.Windows.Forms.Label();
+			this.WatchedMailboxLabel = new System.Windows.Forms.Label();
 			this.PasswordTextBox = new System.Windows.Forms.TextBox();
 			this.PasswordLabel = new System.Windows.Forms.Label();
 			this.LoginTextBox = new System.Windows.Forms.TextBox();
@@ -55,12 +55,12 @@
 			this.sSLDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.loginDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.spamMailBoxDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.WatchedMailboxDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.trashMailBoxDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.SpamMailboxPanel = new System.Windows.Forms.Panel();
-			this.SpamMailboxesButton = new System.Windows.Forms.Button();
-			this.SpamMailBoxTextBox = new System.Windows.Forms.TextBox();
+			this.WatchedMailboxPanel = new System.Windows.Forms.Panel();
+			this.WatchedMailboxesButton = new System.Windows.Forms.Button();
+			this.WatchedMailboxTextBox = new System.Windows.Forms.TextBox();
 			this.AccountButtonsTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.CancelSaveAccountPanel = new System.Windows.Forms.Panel();
 			this.SaveAccountButton = new System.Windows.Forms.Button();
@@ -112,7 +112,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.clearSpamDataSet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PortTextBox)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.AccountsGridView)).BeginInit();
-			this.SpamMailboxPanel.SuspendLayout();
+			this.WatchedMailboxPanel.SuspendLayout();
 			this.AccountButtonsTableLayoutPanel.SuspendLayout();
 			this.CancelSaveAccountPanel.SuspendLayout();
 			this.NewEditDeleteAccountPanel.SuspendLayout();
@@ -164,7 +164,7 @@
 			this.AccountsTableLayoutPanel.Controls.Add(this.TrashMailBoxTextBox, 3, 2);
 			this.AccountsTableLayoutPanel.Controls.Add(this.TrashMailBoxLabel, 2, 2);
 			this.AccountsTableLayoutPanel.Controls.Add(this.TrashMailboxesButton, 5, 2);
-			this.AccountsTableLayoutPanel.Controls.Add(this.SpamMailBoxLabel, 0, 2);
+			this.AccountsTableLayoutPanel.Controls.Add(this.WatchedMailboxLabel, 0, 2);
 			this.AccountsTableLayoutPanel.Controls.Add(this.PasswordTextBox, 3, 1);
 			this.AccountsTableLayoutPanel.Controls.Add(this.PasswordLabel, 2, 1);
 			this.AccountsTableLayoutPanel.Controls.Add(this.LoginTextBox, 1, 1);
@@ -176,7 +176,7 @@
 			this.AccountsTableLayoutPanel.Controls.Add(this.ServerLabel, 0, 0);
 			this.AccountsTableLayoutPanel.Controls.Add(this.SSLCheckBox, 5, 0);
 			this.AccountsTableLayoutPanel.Controls.Add(this.AccountsGridView, 0, 3);
-			this.AccountsTableLayoutPanel.Controls.Add(this.SpamMailboxPanel, 1, 2);
+			this.AccountsTableLayoutPanel.Controls.Add(this.WatchedMailboxPanel, 1, 2);
 			this.AccountsTableLayoutPanel.Controls.Add(this.AccountButtonsTableLayoutPanel, 0, 4);
 			this.AccountsTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.AccountsTableLayoutPanel.Location = new System.Drawing.Point(3, 3);
@@ -237,16 +237,16 @@
 			this.TrashMailboxesButton.UseVisualStyleBackColor = true;
 			this.TrashMailboxesButton.Click += new System.EventHandler(this.TrashMailBoxesButton_Click);
 			// 
-			// SpamMailBoxLabel
+			// WatchedMailboxLabel
 			// 
-			this.SpamMailBoxLabel.AutoSize = true;
-			this.SpamMailBoxLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.SpamMailBoxLabel.Location = new System.Drawing.Point(3, 52);
-			this.SpamMailBoxLabel.Name = "SpamMailBoxLabel";
-			this.SpamMailBoxLabel.Size = new System.Drawing.Size(77, 26);
-			this.SpamMailBoxLabel.TabIndex = 10;
-			this.SpamMailBoxLabel.Text = "Spam MailBox:";
-			this.SpamMailBoxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.WatchedMailboxLabel.AutoSize = true;
+			this.WatchedMailboxLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.WatchedMailboxLabel.Location = new System.Drawing.Point(3, 52);
+			this.WatchedMailboxLabel.Name = "WatchedMailboxLabel";
+			this.WatchedMailboxLabel.Size = new System.Drawing.Size(77, 26);
+			this.WatchedMailboxLabel.TabIndex = 10;
+			this.WatchedMailboxLabel.Text = "Spam MailBox:";
+			this.WatchedMailboxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// PasswordTextBox
 			// 
@@ -381,7 +381,7 @@
             this.sSLDataGridViewCheckBoxColumn,
             this.loginDataGridViewTextBoxColumn,
             this.passwordDataGridViewTextBoxColumn,
-            this.spamMailBoxDataGridViewTextBoxColumn,
+            this.WatchedMailboxDataGridViewTextBoxColumn,
             this.trashMailBoxDataGridViewTextBoxColumn,
             this.idDataGridViewTextBoxColumn});
 			this.AccountsTableLayoutPanel.SetColumnSpan(this.AccountsGridView, 6);
@@ -434,13 +434,13 @@
 			this.passwordDataGridViewTextBoxColumn.ReadOnly = true;
 			this.passwordDataGridViewTextBoxColumn.Visible = false;
 			// 
-			// spamMailBoxDataGridViewTextBoxColumn
+			// WatchedMailboxDataGridViewTextBoxColumn
 			// 
-			this.spamMailBoxDataGridViewTextBoxColumn.DataPropertyName = "SpamMailBox";
-			this.spamMailBoxDataGridViewTextBoxColumn.HeaderText = "Spam MailBox";
-			this.spamMailBoxDataGridViewTextBoxColumn.Name = "spamMailBoxDataGridViewTextBoxColumn";
-			this.spamMailBoxDataGridViewTextBoxColumn.ReadOnly = true;
-			this.spamMailBoxDataGridViewTextBoxColumn.Width = 200;
+			this.WatchedMailboxDataGridViewTextBoxColumn.DataPropertyName = "WatchedMailbox";
+			this.WatchedMailboxDataGridViewTextBoxColumn.HeaderText = "Spam MailBox";
+			this.WatchedMailboxDataGridViewTextBoxColumn.Name = "WatchedMailboxDataGridViewTextBoxColumn";
+			this.WatchedMailboxDataGridViewTextBoxColumn.ReadOnly = true;
+			this.WatchedMailboxDataGridViewTextBoxColumn.Width = 200;
 			// 
 			// trashMailBoxDataGridViewTextBoxColumn
 			// 
@@ -458,40 +458,40 @@
 			this.idDataGridViewTextBoxColumn.ReadOnly = true;
 			this.idDataGridViewTextBoxColumn.Visible = false;
 			// 
-			// SpamMailboxPanel
+			// WatchedMailboxPanel
 			// 
-			this.SpamMailboxPanel.AutoSize = true;
-			this.SpamMailboxPanel.Controls.Add(this.SpamMailboxesButton);
-			this.SpamMailboxPanel.Controls.Add(this.SpamMailBoxTextBox);
-			this.SpamMailboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.SpamMailboxPanel.Location = new System.Drawing.Point(83, 52);
-			this.SpamMailboxPanel.Margin = new System.Windows.Forms.Padding(0);
-			this.SpamMailboxPanel.Name = "SpamMailboxPanel";
-			this.SpamMailboxPanel.Size = new System.Drawing.Size(353, 26);
-			this.SpamMailboxPanel.TabIndex = 16;
+			this.WatchedMailboxPanel.AutoSize = true;
+			this.WatchedMailboxPanel.Controls.Add(this.WatchedMailboxesButton);
+			this.WatchedMailboxPanel.Controls.Add(this.WatchedMailboxTextBox);
+			this.WatchedMailboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.WatchedMailboxPanel.Location = new System.Drawing.Point(83, 52);
+			this.WatchedMailboxPanel.Margin = new System.Windows.Forms.Padding(0);
+			this.WatchedMailboxPanel.Name = "WatchedMailboxPanel";
+			this.WatchedMailboxPanel.Size = new System.Drawing.Size(353, 26);
+			this.WatchedMailboxPanel.TabIndex = 16;
 			// 
-			// SpamMailboxesButton
+			// WatchedMailboxesButton
 			// 
-			this.SpamMailboxesButton.Enabled = false;
-			this.SpamMailboxesButton.Location = new System.Drawing.Point(324, 3);
-			this.SpamMailboxesButton.Name = "SpamMailboxesButton";
-			this.SpamMailboxesButton.Size = new System.Drawing.Size(26, 20);
-			this.SpamMailboxesButton.TabIndex = 16;
-			this.SpamMailboxesButton.Text = "...";
-			this.SpamMailboxesButton.UseVisualStyleBackColor = true;
-			this.SpamMailboxesButton.Click += new System.EventHandler(this.SpamMailboxesButton_Click);
+			this.WatchedMailboxesButton.Enabled = false;
+			this.WatchedMailboxesButton.Location = new System.Drawing.Point(324, 3);
+			this.WatchedMailboxesButton.Name = "WatchedMailboxesButton";
+			this.WatchedMailboxesButton.Size = new System.Drawing.Size(26, 20);
+			this.WatchedMailboxesButton.TabIndex = 16;
+			this.WatchedMailboxesButton.Text = "...";
+			this.WatchedMailboxesButton.UseVisualStyleBackColor = true;
+			this.WatchedMailboxesButton.Click += new System.EventHandler(this.WatchedMailboxesButton_Click);
 			// 
-			// SpamMailBoxTextBox
+			// WatchedMailboxTextBox
 			// 
-			this.SpamMailBoxTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.WatchedMailboxTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.SpamMailBoxTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.AccountsBindingSource, "SpamMailBox", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-			this.SpamMailBoxTextBox.Enabled = false;
-			this.SpamMailBoxTextBox.Location = new System.Drawing.Point(3, 3);
-			this.SpamMailBoxTextBox.Name = "SpamMailBoxTextBox";
-			this.SpamMailBoxTextBox.ReadOnly = true;
-			this.SpamMailBoxTextBox.Size = new System.Drawing.Size(319, 20);
-			this.SpamMailBoxTextBox.TabIndex = 14;
+			this.WatchedMailboxTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.AccountsBindingSource, "WatchedMailbox", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.WatchedMailboxTextBox.Enabled = false;
+			this.WatchedMailboxTextBox.Location = new System.Drawing.Point(3, 3);
+			this.WatchedMailboxTextBox.Name = "WatchedMailboxTextBox";
+			this.WatchedMailboxTextBox.ReadOnly = true;
+			this.WatchedMailboxTextBox.Size = new System.Drawing.Size(319, 20);
+			this.WatchedMailboxTextBox.TabIndex = 14;
 			// 
 			// AccountButtonsTableLayoutPanel
 			// 
@@ -978,8 +978,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.clearSpamDataSet)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.PortTextBox)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.AccountsGridView)).EndInit();
-			this.SpamMailboxPanel.ResumeLayout(false);
-			this.SpamMailboxPanel.PerformLayout();
+			this.WatchedMailboxPanel.ResumeLayout(false);
+			this.WatchedMailboxPanel.PerformLayout();
 			this.AccountButtonsTableLayoutPanel.ResumeLayout(false);
 			this.CancelSaveAccountPanel.ResumeLayout(false);
 			this.NewEditDeleteAccountPanel.ResumeLayout(false);
@@ -1021,16 +1021,16 @@
 		private ClearSpamDataSetTableAdapters.AccountTableAdapter accountTableAdapter;
 		private System.Windows.Forms.TextBox TrashMailBoxTextBox;
 		private System.Windows.Forms.Label TrashMailBoxLabel;
-		private System.Windows.Forms.Label SpamMailBoxLabel;
+		private System.Windows.Forms.Label WatchedMailboxLabel;
 		private System.Windows.Forms.Button CancelAccountButton;
 		private System.Windows.Forms.Button SaveAccountButton;
 		private System.Windows.Forms.Button NewAccountButton;
 		private System.Windows.Forms.Button EditAccountButton;
 		private System.Windows.Forms.Button DeleteAccountButton;
 		private System.Windows.Forms.Button TrashMailboxesButton;
-		private System.Windows.Forms.Panel SpamMailboxPanel;
-		private System.Windows.Forms.Button SpamMailboxesButton;
-		private System.Windows.Forms.TextBox SpamMailBoxTextBox;
+		private System.Windows.Forms.Panel WatchedMailboxPanel;
+		private System.Windows.Forms.Button WatchedMailboxesButton;
+		private System.Windows.Forms.TextBox WatchedMailboxTextBox;
 		private System.Windows.Forms.TableLayoutPanel AccountButtonsTableLayoutPanel;
 		private System.Windows.Forms.Panel CancelSaveAccountPanel;
 		private System.Windows.Forms.Button ProcessRulesButton;
@@ -1063,7 +1063,7 @@
 		private System.Windows.Forms.DataGridViewCheckBoxColumn sSLDataGridViewCheckBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn loginDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn passwordDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn spamMailBoxDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn WatchedMailboxDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn trashMailBoxDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.Timer ProcessRulesTimer;

@@ -1,46 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClearSpam
 {
-	public partial class MailBoxesForm : Form
-	{
-		private string[] _mailboxes;
+    public partial class MailBoxesForm : Form
+    {
+        private string[] _mailboxes;
 
-		public event EventHandler<string> mailboxSelected;
+        public event EventHandler<string> mailboxSelected;
 
-		public string[] mailboxes
-		{
-			get { return _mailboxes; }
+        public string[] mailboxes
+        {
+            get => _mailboxes;
 
-			set
-			{
-				_mailboxes = value;
+            set
+            {
+                _mailboxes = value;
 
-				foreach (string m in _mailboxes)
-				{
-					MailBoxesListBox.Items.Add(m);
-				}
-			}
-		}
+                foreach (var m in _mailboxes)
+                {
+                    MailBoxesListBox.Items.Add(m);
+                }
+            }
+        }
 
-		public MailBoxesForm()
-		{
-			InitializeComponent();
-		}
+        public MailBoxesForm()
+        {
+            InitializeComponent();
+        }
 
-		private void MailBoxesListBox_SelectedValueChanged(object sender, EventArgs e)
-		{
-			mailboxSelected?.Invoke(this, (string)MailBoxesListBox.SelectedItem);
+        private void MailBoxesListBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            mailboxSelected?.Invoke(this, (string)MailBoxesListBox.SelectedItem);
 
-			this.Close();
-		}
-	}
+            Close();
+        }
+    }
 }
