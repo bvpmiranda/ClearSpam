@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearSpam", "ClearSpam\ClearSpam.csproj", "{9E7DB1D5-4498-430F-B9CF-CEB3E9C01CF7}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{A1B5DC96-261E-43F1-B387-F6C09DE0561E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{47CF2863-7991-4FFF-9AD8-CC25EE1F50E2}"
@@ -27,11 +25,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClearSpam.Persistence", "Cl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClearSpam.Web", "ClearSpam.Web\ClearSpam.Web.csproj", "{61EB7685-7199-4A5F-93C2-145729D08B87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearnSpam.Infrastructure.Tests", "ClearnSpam.Infrastructure.Tests\ClearnSpam.Infrastructure.Tests.csproj", "{9A9A93A1-AB65-401D-B102-16A4FF05FEF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClearnSpam.Infrastructure.Tests", "ClearnSpam.Infrastructure.Tests\ClearnSpam.Infrastructure.Tests.csproj", "{9A9A93A1-AB65-401D-B102-16A4FF05FEF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearSpam.TestsCommon", "ClearSpam.TestsCommon\ClearSpam.TestsCommon.csproj", "{B42BF0DA-0AEF-4557-9A10-1E38D61B4172}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClearSpam.TestsCommon", "ClearSpam.TestsCommon\ClearSpam.TestsCommon.csproj", "{B42BF0DA-0AEF-4557-9A10-1E38D61B4172}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearSpam.Application.Tests", "ClearSpam.Application.Tests\ClearSpam.Application.Tests.csproj", "{A00465B4-507A-44F4-B8A3-92B6F5395E25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClearSpam.Application.Tests", "ClearSpam.Application.Tests\ClearSpam.Application.Tests.csproj", "{A00465B4-507A-44F4-B8A3-92B6F5395E25}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{806D2406-44D9-4589-844E-53E8AD8DF06E}"
 EndProject
@@ -39,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{29393821-7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{3876A9C6-80B6-4A8F-97E8-563515C8A934}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearSpam.SqlMigrations", "ClearSpam.SqlMigrations\ClearSpam.SqlMigrations.csproj", "{FB6391C6-44B6-4D73-AC20-59E856E3D0B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClearSpam.SqlMigrations", "ClearSpam.SqlMigrations\ClearSpam.SqlMigrations.csproj", "{FB6391C6-44B6-4D73-AC20-59E856E3D0B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +45,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9E7DB1D5-4498-430F-B9CF-CEB3E9C01CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9E7DB1D5-4498-430F-B9CF-CEB3E9C01CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9E7DB1D5-4498-430F-B9CF-CEB3E9C01CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9E7DB1D5-4498-430F-B9CF-CEB3E9C01CF7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{58D1891F-3310-42EF-986C-E4D72CD74401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{58D1891F-3310-42EF-986C-E4D72CD74401}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58D1891F-3310-42EF-986C-E4D72CD74401}.Release|Any CPU.ActiveCfg = Release|Any CPU
