@@ -37,11 +37,7 @@ namespace ClearSpam.Web.Pages.Rules
                 var ruleQuery = new GetRuleQuery(id.GetValueOrDefault());
                 Rule = await mediator.Send(ruleQuery, CancellationToken.None);
 
-                var accountQuery = new GetAccountQuery(Rule.AccountId);
-                Rule.Account = await mediator.Send(accountQuery, CancellationToken.None);
-
-                var fieldsQuery = new GetFieldsQuery();
-                Fields = (await mediator.Send(fieldsQuery, CancellationToken.None));
+                await FillMissingProperties(Rule.AccountId);
             }
             catch (NotFoundException)
             {
@@ -62,8 +58,34 @@ namespace ClearSpam.Web.Pages.Rules
             {
                 return NotFound();
             }
+            catch (ValidationException e)
+            {
+                foreach (var failure in e.Failures)
+                {
+                    ModelState.AddModelError(failure.Key, string.Join(';', failure.Value));
+                }
+
+                await FillMissingProperties(Rule.AccountId);
+
+                return Page();
+            }
 
             return RedirectToPage("../Accounts/Details", new { id = Rule.AccountId });
+        }
+
+        private async Task FillMissingProperties(int accountId)
+        {
+            if (Rule.Account == null)
+            {
+                var accountQuery = new GetAccountQuery(accountId);
+                Rule.Account = await mediator.Send(accountQuery, CancellationToken.None);
+            }
+
+            if (Fields == null)
+            {
+                var fieldsQuery = new GetFieldsQuery();
+                Fields = (await mediator.Send(fieldsQuery, CancellationToken.None));
+            }
         }
     }
 }

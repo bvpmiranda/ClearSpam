@@ -23,7 +23,10 @@ namespace ClearSpam.Application.Validators
                     return;
                 }
 
-                if (repository.Any<Rule>(y => y.Field == x.Field && y.Content == x.Content))
+                if (repository.Any<Rule>(y => y.Id != x.Id && 
+                                              y.AccountId == x.AccountId &&
+                                              y.Field == x.Field && 
+                                              y.Content == x.Content))
                 {
                     context.AddFailure(nameof(RuleDto.Content), string.Format(RuleAlreadyExists, x.Field, x.Content));
                     return;
