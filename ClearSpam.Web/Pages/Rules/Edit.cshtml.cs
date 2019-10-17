@@ -37,7 +37,7 @@ namespace ClearSpam.Web.Pages.Rules
                 var ruleQuery = new GetRuleQuery(id.GetValueOrDefault());
                 Rule = await mediator.Send(ruleQuery, CancellationToken.None);
 
-                var accountQuery = new GetAccountQuery(id.GetValueOrDefault());
+                var accountQuery = new GetAccountQuery(Rule.AccountId);
                 Rule.Account = await mediator.Send(accountQuery, CancellationToken.None);
 
                 var fieldsQuery = new GetFieldsQuery();

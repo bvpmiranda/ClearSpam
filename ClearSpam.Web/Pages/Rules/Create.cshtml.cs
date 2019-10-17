@@ -7,6 +7,7 @@ using ClearSpam.Application.Rules.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,14 +29,9 @@ namespace ClearSpam.Web.Pages.Rules
         {
             try
             {
-                var accountQuery = new GetAccountQuery(id.GetValueOrDefault());
-                Rule = new RuleDto
-                {
-                    Account = await mediator.Send(accountQuery, CancellationToken.None)
-                };
+                Rule = new RuleDto();
 
-                var fieldsQuery = new GetFieldsQuery();
-                Fields = (await mediator.Send(fieldsQuery, CancellationToken.None));
+                await FillMissingProperties(id.GetValueOrDefault());
             }
             catch (NotFoundException)
             {
@@ -61,8 +57,34 @@ namespace ClearSpam.Web.Pages.Rules
             {
                 return NotFound();
             }
+            catch (ValidationException e)
+            {
+                foreach (var failure in e.Failures)
+                {
+                    ModelState.AddModelError(failure.Key, string.Join(';', failure.Value));
+                }
+
+                await FillMissingProperties(Rule.AccountId);
+
+                return Page();
+            }
 
             return RedirectToPage("../Accounts/Details", new { id = Rule.AccountId });
+        }
+
+        private async Task FillMissingProperties(int accountId)
+        {
+            if (Rule.Account == null)
+            {
+                var accountQuery = new GetAccountQuery(accountId);
+                Rule.Account = await mediator.Send(accountQuery, CancellationToken.None);
+            }
+
+            if (Fields == null)
+            {
+                var fieldsQuery = new GetFieldsQuery();
+                Fields = (await mediator.Send(fieldsQuery, CancellationToken.None));
+            }
         }
     }
 }

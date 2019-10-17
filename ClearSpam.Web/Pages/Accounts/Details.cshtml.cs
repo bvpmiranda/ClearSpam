@@ -30,7 +30,7 @@ namespace ClearSpam.Web.Pages.Accounts
                 Account = await mediator.Send(accountQuery, CancellationToken.None);
 
                 var rulesQuery = new GetRulesQuery(id.GetValueOrDefault());
-                Account.Rules = (await mediator.Send(rulesQuery, CancellationToken.None)).OrderBy(x => x.Field).ThenBy(x => x.Content).ToHashSet();
+                Account.Rules = (await mediator.Send(rulesQuery, CancellationToken.None)).ToHashSet();
             }
             catch (NotFoundException)
             {

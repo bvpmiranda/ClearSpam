@@ -5,6 +5,8 @@ using ClearSpam.TestsCommon;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -48,6 +50,32 @@ namespace ClearSpam.Application.Tests.Rules.Queries
 
             var RuleDto2 = result.Single(x => x.Id == Rule2.Id);
             AssertRule(Rule2, RuleDto2);
+        }
+
+        [TestMethod]
+        public void Handle_HappyPath_ReturnsRulesInCorrectOrder()
+        {
+            var ruleA = CreateRule(field: "Field", content: "A");
+            var ruleB = CreateRule(field: "Field", content: "B");
+            var ruleDashA = CreateRule(field: "Field", content: "-A");
+
+            RepositoryMock.Setup(x => x.Get<Rule>(It.IsAny<Expression<Func<Rule, bool>>>())).Returns(new Rule[]
+            {
+                ruleB,
+                ruleA,
+                ruleDashA
+            });
+
+            MapperMock.Setup(x => x.Map<RuleDto>(ruleA)).Returns(CreateRuleDto(ruleA));
+            MapperMock.Setup(x => x.Map<RuleDto>(ruleB)).Returns(CreateRuleDto(ruleB));
+            MapperMock.Setup(x => x.Map<RuleDto>(ruleDashA)).Returns(CreateRuleDto(ruleDashA));
+
+            var request = new GetRulesQuery(accountId: 1);
+            var result = _getRulesQueryHandler.Handle(request, new CancellationToken()).Result.ToList();
+
+            Assert.AreEqual(ruleDashA.Content, result[0].Content);
+            Assert.AreEqual(ruleA.Content, result[1].Content);
+            Assert.AreEqual(ruleB.Content, result[2].Content);
         }
     }
 }

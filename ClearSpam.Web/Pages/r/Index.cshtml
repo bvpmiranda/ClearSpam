@@ -1,0 +1,48 @@
+﻿@page
+@model ClearSpam.Web.Pages.r.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Rule[0].Account)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rule[0].Field)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rule[0].Content)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Rule) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Field)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
