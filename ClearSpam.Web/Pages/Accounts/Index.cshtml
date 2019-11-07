@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Accounts and Rules</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -38,35 +38,43 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Account) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Server)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Port)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ssl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Login)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WatchedMailbox)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrashMailbox)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @if (Model?.Account != null)
+        {
+            foreach (var item in Model.Account)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Server)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Port)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ssl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Login)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WatchedMailbox)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrashMailbox)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        
     </tbody>
 </table>
+<form method="post" asp-page="Index">
+    <input type="submit" value="Process Rules" asp-page-handler="ClearSpam" />
+</form>

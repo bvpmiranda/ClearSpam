@@ -9,5 +9,7 @@ namespace ClearSpam.Application.Interfaces
         void Start();
 
         void Stop();
+        
+        void Restart();
     }
 }

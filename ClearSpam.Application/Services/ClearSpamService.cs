@@ -41,6 +41,12 @@ namespace ClearSpam.Application.Services
             timer.Change(dueTime: Timeout.Infinite, period: Timeout.Infinite);
         }
 
+        public void Restart()
+        {
+            Stop();
+            Start();
+        }
+
         public void Dispose()
         {
             timer.Dispose();

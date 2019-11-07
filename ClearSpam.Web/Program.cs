@@ -1,4 +1,5 @@
-﻿using ClearSpam.SqlMigrations;
+﻿using ClearSpam.Application.Interfaces;
+using ClearSpam.SqlMigrations;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -6,6 +7,8 @@ namespace ClearSpam.Web
 {
     public class Program
     {
+        public static IClearSpamService ClearSpamService;
+
         public static void Main(string[] args)
         {
             using (var context = new ContextFactory().CreateDbContext())

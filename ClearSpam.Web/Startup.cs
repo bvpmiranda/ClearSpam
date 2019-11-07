@@ -37,8 +37,8 @@ namespace ClearSpam.Web
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetAccountQueryHandler>());
 
-            var clearSpamService = services.BuildServiceProvider().GetService<IClearSpamService>();
-            clearSpamService.Start();
+            Program.ClearSpamService = services.BuildServiceProvider().GetService<IClearSpamService>();
+            Program.ClearSpamService.Start();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
