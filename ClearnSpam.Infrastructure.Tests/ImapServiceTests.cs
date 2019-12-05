@@ -37,7 +37,7 @@ namespace ClearnSpam.Infrastructure.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NullLogger_ThrowsException()
         {
-            VerifyExceptionMessage(() => _ = new ImapService(CryptographyMock.Object, null), "cryptography");
+            VerifyExceptionMessage(() => _ = new ImapService(CryptographyMock.Object, null), "logger");
         }
 
         [TestMethod]
