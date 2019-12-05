@@ -30,14 +30,21 @@ namespace ClearnSpam.Infrastructure.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NullCryptography_ThrowsException()
         {
-            VerifyExceptionMessage(() => _ = new ImapService(null), "cryptography");
+            VerifyExceptionMessage(() => _ = new ImapService(null, null), "cryptography");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor_NullLogger_ThrowsException()
+        {
+            VerifyExceptionMessage(() => _ = new ImapService(CryptographyMock.Object, null), "cryptography");
         }
 
         [TestMethod]
         public void GetMailboxesList_HappyPath_CallsService()
         {
             var account = new Account();
-            var service = new ImapService(CryptographyMock.Object);
+            var service = new ImapService(CryptographyMock.Object, LoggerMock.Object);
             service.ImapClient = _imapClientMock.Object;
 
             service.GetMailboxesList();
@@ -52,7 +59,7 @@ namespace ClearnSpam.Infrastructure.Tests
             var mailbox2 = NewGuid();
 
             var account = new Account();
-            var service = new ImapService(CryptographyMock.Object);
+            var service = new ImapService(CryptographyMock.Object, LoggerMock.Object);
             service.ImapClient = _imapClientMock.Object;
 
             _imapClientMock.Setup(x => x.ListMailboxes()).Returns(new string[] {

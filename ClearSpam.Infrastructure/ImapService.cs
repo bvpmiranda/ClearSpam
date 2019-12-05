@@ -13,6 +13,7 @@ namespace ClearSpam.Infrastructure
     {
         private AccountDto account;
         private readonly ICryptography cryptography;
+        private readonly ILogger logger;
 
         public AccountDto Account
         {
@@ -34,9 +35,9 @@ namespace ClearSpam.Infrastructure
                         ImapClient = new ImapClient(account.Server, account.Port, account.Login, cryptography.Decrypt(account.Password), AuthMethod.Login, account.Ssl);
                         ImapClient.DefaultMailbox = account.WatchedMailbox;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-
+                        logger?.Error(ex.Message);
                     }
                 }
             }
@@ -44,9 +45,10 @@ namespace ClearSpam.Infrastructure
 
         public IImapClient ImapClient { get; set; }
 
-        public ImapService(ICryptography cryptography)
+        public ImapService(ICryptography cryptography, ILogger logger)
         {
             this.cryptography = cryptography ?? throw new ArgumentNullException(nameof(cryptography));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public void Dispose()

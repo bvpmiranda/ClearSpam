@@ -16,6 +16,7 @@ namespace ClearSpam.TestsCommon
         protected static Mock<IMapper> MapperMock = new Mock<IMapper>();
         protected static Mock<ICryptography> CryptographyMock = new Mock<ICryptography>();
         protected static Mock<IImapService> ImapServiceMock = new Mock<IImapService>();
+        protected static Mock<ILogger> LoggerMock = new Mock<ILogger>();
 
         protected static IRepository Repository;
         protected static IMapper Mapper;

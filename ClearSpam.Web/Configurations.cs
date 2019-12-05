@@ -30,7 +30,7 @@ namespace ClearSpam.Web
 
             services.AddScoped<IRepository, Repository>();
             services.AddSingleton<ICryptography, Cryptography>();
-            services.AddSingleton<IImapService, ImapService>();
+            services.AddScoped<IImapService, ImapService>();
 
             services.AddScoped<Application.Interfaces.ILogger, ClearSpam.Infrastructure.Logger>();
 
