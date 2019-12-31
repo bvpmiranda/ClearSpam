@@ -69,24 +69,38 @@
         <div class="col-6">
             <div class="form-group">
                 <label asp-for="Account.WatchedMailbox" class="control-label"></label>
-                <select asp-for="Account.WatchedMailbox" class="form-control">
-                    @foreach (var mailbox in Model.Mailboxes)
-                    {
-                        <option value="@mailbox">@mailbox</option>
-                    }
-                </select>
+                @if (Model.Mailboxes == null)
+                {
+                    <input asp-for="Account.WatchedMailbox" class="form-control" />
+                }
+                else
+                {
+                    <select asp-for="Account.WatchedMailbox" class="form-control">
+                        @foreach (var mailbox in Model.Mailboxes)
+                        {
+                            <option value="@mailbox">@mailbox</option>
+                        }
+                    </select>
+                }
                 <span asp-validation-for="Account.WatchedMailbox" class="text-danger"></span>
             </div>
         </div>
         <div class="col-6">
             <div class="form-group">
                 <label asp-for="Account.TrashMailbox" class="control-label"></label>
-                <select asp-for="Account.TrashMailbox" class="form-control">
-                    @foreach (var mailbox in Model.Mailboxes)
-                    {
-                        <option value="@mailbox">@mailbox</option>
-                    }
-                </select>
+                @if (Model.Mailboxes == null)
+                {
+                    <input asp-for="Account.TrashMailbox" class="form-control" />
+                }
+                else
+                {
+                    <select asp-for="Account.TrashMailbox" class="form-control">
+                        @foreach (var mailbox in Model.Mailboxes)
+                        {
+                            <option value="@mailbox">@mailbox</option>
+                        }
+                    </select>
+                }
                 <span asp-validation-for="Account.TrashMailbox" class="text-danger"></span>
             </div>
         </div>

@@ -33,13 +33,20 @@ namespace ClearSpam.Web.Pages.Accounts
             {
                 var accountQuery = new GetAccountQuery(id.GetValueOrDefault());
                 Account = await mediator.Send(accountQuery, CancellationToken.None);
-
-                var mailboxesQuery = new GetMailboxesQuery(Account);
-                Mailboxes = await mediator.Send(mailboxesQuery, CancellationToken.None);
             }
             catch (NotFoundException)
             {
                 return NotFound();
+            }
+
+            try
+            {
+                var mailboxesQuery = new GetMailboxesQuery(Account);
+                Mailboxes = await mediator.Send(mailboxesQuery, CancellationToken.None);
+            }
+            catch (System.Exception)
+            {
+                Mailboxes = null;
             }
 
             return Page();
