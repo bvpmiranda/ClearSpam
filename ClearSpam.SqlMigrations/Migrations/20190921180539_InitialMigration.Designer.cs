@@ -55,11 +55,6 @@ namespace ClearSpam.SqlMigrations.Migrations
 
                     b.Property<bool>("Ssl");
 
-                    b.Property<string>("TrashMailbox")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .IsUnicode(false);
-
                     b.HasKey("Id");
 
                     b.ToTable("Account");

@@ -60,17 +60,18 @@
                 <input asp-for="Account.WatchedMailbox" class="form-control" readonly />
             </div>
         </div>
-        <div class="col-6">
-            <div class="form-group">
-                <label asp-for="Account.TrashMailbox" class="control-label"></label>
-                <input asp-for="Account.TrashMailbox" class="form-control" readonly />
-            </div>
+    </div>
+
+    <div class="row">
+        <div class="col text-left">
+            <a asp-page="./Index" class="btn btn-primary">Cancel</a>
+        </div>
+        <div class="col text-right">
+            <form method="post">
+                <input type="hidden" asp-for="Account.Id" />
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </form>
         </div>
     </div>
 
-    <form method="post">
-        <input type="hidden" asp-for="Account.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
 </div>

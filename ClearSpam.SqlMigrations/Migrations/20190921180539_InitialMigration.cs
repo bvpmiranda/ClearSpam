@@ -14,18 +14,24 @@ namespace ClearSpam.SqlMigrations.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(unicode: true, maxLength: 450, nullable: false),
                     Name = table.Column<string>(unicode: false, maxLength: 255, nullable: false),
                     Server = table.Column<string>(unicode: false, maxLength: 255, nullable: false),
                     Port = table.Column<int>(nullable: false),
                     Ssl = table.Column<bool>(nullable: false),
                     Login = table.Column<string>(unicode: false, maxLength: 255, nullable: false),
                     Password = table.Column<string>(unicode: false, maxLength: 255, nullable: false),
-                    WatchedMailbox = table.Column<string>(unicode: false, maxLength: 255, nullable: true),
-                    TrashMailbox = table.Column<string>(unicode: false, maxLength: 255, nullable: true)
+                    WatchedMailbox = table.Column<string>(unicode: false, maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Account", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Account_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.AddUniqueConstraint("UQ_Account_Name", "Account", "Name");

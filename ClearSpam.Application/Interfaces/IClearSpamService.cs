@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ClearSpam.Application.Interfaces
+﻿namespace ClearSpam.Application.Interfaces
 {
     public interface IClearSpamService
     {
@@ -11,5 +7,11 @@ namespace ClearSpam.Application.Interfaces
         void Stop();
         
         void Restart();
+
+        void ProcessRules(string userId);
+
+        void ProcessRules(int accountId);
+
+        void ProcessRules(int accountId, int ruleId);
     }
 }

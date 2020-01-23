@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ClearSpam.Application.BaseMediator.Queries;
 using ClearSpam.Application.Models;
+using ClearSpam.Common;
 using ClearSpam.Domain.Entities;
 using ClearSpam.Domain.Interfaces;
 using MediatR;
@@ -19,7 +20,10 @@ namespace ClearSpam.Application.Accounts.Queries
 
         public Task<IEnumerable<AccountDto>> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(Handle().OrderBy(x => x.Name).AsEnumerable());
+            var entities = Repository.Get<Account>(x => x.UserId == request.UserId).OrderBy(x => x.Name);
+            var result = Mapper.MapList<Account, AccountDto>(entities);
+
+            return Task.FromResult(result);
         }
     }
 }

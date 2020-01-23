@@ -33,27 +33,46 @@ namespace ClearSpam.Application.ClearSpam.Commands
         {
             var accounts = new List<Account>();
 
-            if (request.Id.HasValue)
+            if (request.AccountId.HasValue)
             {
-                accounts.Add(repository.Get<Account>(request.Id.Value));
-            }
-            else
-            {
-                accounts.AddRange(repository.Get<Account>());
+                var account = repository.Get<Account>(request.AccountId.Value);
+
+                if (account != null)
+                    accounts.Add(account);
+
+                ProcessAccounts(accounts, request.RuleId);
+
+                return Unit.Value;
             }
 
+            if (!string.IsNullOrWhiteSpace(request.UserId))
+            {
+                accounts.AddRange(repository.Get<Account>(x => x.UserId == request.UserId).ToList());
+                ProcessAccounts(accounts);
+
+                return Unit.Value;
+            }
+
+            accounts.AddRange(repository.Get<Account>());
             ProcessAccounts(accounts);
 
             return Unit.Value;
         }
 
-        private void ProcessAccounts(IEnumerable<Account> accounts)
+        private void ProcessAccounts(IEnumerable<Account> accounts, int? ruleId = null)
         {
             foreach (var account in accounts)
             {
                 try
                 {
-                    account.Rules = repository.Get<Rule>(x => x.AccountId == account.Id).ToList();
+                    if (ruleId.HasValue)
+                    {
+                        account.Rules = repository.Get<Rule>(x => x.AccountId == account.Id && x.Id == ruleId.Value).ToList();
+                    }
+                    else
+                    {
+                        account.Rules = repository.Get<Rule>(x => x.AccountId == account.Id).ToList();
+                    }
 
                     imapService.Account = mapper.Map<AccountDto>(account);
                     var messages = imapService.GetMessagesFromWatchedMailbox();

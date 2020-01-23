@@ -6,6 +6,7 @@ using ClearSpam.Application.Models;
 using ClearSpam.Application.Rules.Commands;
 using ClearSpam.Application.Rules.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace ClearSpam.Web.Pages.Rules
 {
+    [Authorize]
     public class EditRuleModel : PageModel
     {
         private readonly IMediator mediator;
@@ -52,7 +54,9 @@ namespace ClearSpam.Web.Pages.Rules
             try
             {
                 var command = mapper.Map<UpdateRuleCommand>(Rule);
-                await mediator.Send(command, CancellationToken.None);
+                var rule = await mediator.Send(command, CancellationToken.None);
+
+                Program.ClearSpamService.ProcessRules(rule.AccountId, rule.Id);
             }
             catch (NotFoundException)
             {

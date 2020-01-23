@@ -4,6 +4,7 @@ using ClearSpam.Application.Accounts.Queries;
 using ClearSpam.Application.Exceptions;
 using ClearSpam.Application.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace ClearSpam.Web.Pages.Accounts
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly IMediator mediator;

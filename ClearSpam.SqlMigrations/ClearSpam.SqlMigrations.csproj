@@ -8,12 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ClearSpam.Application\ClearSpam.Application.csproj" />
     <ProjectReference Include="..\ClearSpam.Domain\ClearSpam.Domain.csproj" />
     <ProjectReference Include="..\ClearSpam.Persistence\ClearSpam.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="appsettings.notebruno.json">
+    <None Update="appsettings.zenBookFlip.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="appsettings.json">

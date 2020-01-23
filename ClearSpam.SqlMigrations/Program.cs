@@ -1,4 +1,4 @@
-﻿using ClearSpam.Persistence;
+﻿using ClearSpam.SqlMigrations.Infrastructure;
 using System;
 
 namespace ClearSpam.SqlMigrations
@@ -7,7 +7,8 @@ namespace ClearSpam.SqlMigrations
     {
         static void Main(string[] args)
         {
-            using (var context = new ContextFactory().CreateDbContext())
+            var configurations = new Configurations();
+            using (var context = new ContextFactory().CreateDbContext(configurations.ConnectionString))
             {
                 Console.WriteLine("Applying ClearSpam Migrations");
                 ClearSpamMigrations.ApplyMigrations(context);

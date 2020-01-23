@@ -13,6 +13,11 @@ namespace ClearSpam.Persistence.Configurations
 
             builder.Property(x => x.Id);
 
+            builder.Property(x => x.UserId)
+                .IsRequired()
+                .HasMaxLength(Domain.Configurations.AccountConfigurations.UserIdMaxLength)
+                .IsUnicode(true);
+
             builder.Property(x => x.Name)
                 .IsRequired()
                 .HasMaxLength(Domain.Configurations.AccountConfigurations.NameMaxLength)
@@ -41,10 +46,6 @@ namespace ClearSpam.Persistence.Configurations
 
             builder.Property(x => x.WatchedMailbox)
                 .HasMaxLength(Domain.Configurations.AccountConfigurations.WatchedMailboxMaxLength)
-                .IsUnicode(false);
-
-            builder.Property(x => x.TrashMailbox)
-                .HasMaxLength(Domain.Configurations.AccountConfigurations.TrashMailboxMaxLength)
                 .IsUnicode(false);
         }
     }

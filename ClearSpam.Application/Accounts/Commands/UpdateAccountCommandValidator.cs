@@ -12,7 +12,6 @@ namespace ClearSpam.Application.Accounts.Commands
         {
             RuleFor(x => x.Id).GreaterThan(0);
             RuleFor(x => x.WatchedMailbox).MaximumLength(AccountConfigurations.WatchedMailboxMaxLength).NotEmpty();
-            RuleFor(x => x.TrashMailbox).MaximumLength(AccountConfigurations.TrashMailboxMaxLength).NotEmpty();
 
             RuleFor(x => x).Custom((x, context) => {
                 var dto = mapper.Map<AccountDto>(x);

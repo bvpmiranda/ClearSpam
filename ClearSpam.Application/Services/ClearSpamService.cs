@@ -1,17 +1,9 @@
-﻿using AutoMapper;
-using ClearSpam.Application.ClearSpam.Commands;
+﻿using ClearSpam.Application.ClearSpam.Commands;
 using ClearSpam.Application.Interfaces;
-using ClearSpam.Application.Models;
-using ClearSpam.Common;
-using ClearSpam.Domain.Entities;
-using ClearSpam.Domain.Interfaces;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace ClearSpam.Application.Services
 {
@@ -23,6 +15,8 @@ namespace ClearSpam.Application.Services
 
         private bool processing;
 
+        private bool disposed = false;
+
         public ClearSpamService(IMediator mediator, IClearSpamConfigurations configuration)
         {
             this.mediator = mediator;
@@ -33,7 +27,8 @@ namespace ClearSpam.Application.Services
 
         public void Start()
         {
-            timer.Change(dueTime: 0, periodInSeconds * 1000);
+            if (periodInSeconds > 0)
+                timer.Change(dueTime: 0, periodInSeconds * 1000);
         }
 
         public void Stop()
@@ -47,12 +42,48 @@ namespace ClearSpam.Application.Services
             Start();
         }
 
-        public void Dispose()
+        public void ProcessRules(string userId)
         {
-            timer.Dispose();
+            Task.Run(() => {
+                var clearSpamCommand = new ClearSpamCommand(userId);
+                mediator.Send(clearSpamCommand, CancellationToken.None);
+            });
         }
 
-        private void ClearSpam(object state)
+        public void ProcessRules(int accountId)
+        {
+            Task.Run(() => {
+                var clearSpamCommand = new ClearSpamCommand(accountId);
+                mediator.Send(clearSpamCommand, CancellationToken.None);
+            });
+        }
+
+        public void ProcessRules(int accountId, int ruleId)
+        {
+            Task.Run(() => {
+                var clearSpamCommand = new ClearSpamCommand(accountId, ruleId);
+                mediator.Send(clearSpamCommand, CancellationToken.None);
+            });
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                    timer.Dispose();
+
+                disposed = true;
+            }
+        }
+
+        private void ClearSpam(object state = null)
         {
             if (processing)
                 return;

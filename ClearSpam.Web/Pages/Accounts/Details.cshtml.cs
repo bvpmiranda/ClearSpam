@@ -3,6 +3,7 @@ using ClearSpam.Application.Exceptions;
 using ClearSpam.Application.Models;
 using ClearSpam.Application.Rules.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace ClearSpam.Web.Pages.Accounts
 {
+    [Authorize]
     public class DetailsModel : PageModel
     {
         private readonly IMediator mediator;
@@ -38,6 +40,13 @@ namespace ClearSpam.Web.Pages.Accounts
             }
 
             return Page();
+        }
+
+        public IActionResult OnPostClearSpam([FromForm] int accountId)
+        {
+            Program.ClearSpamService.ProcessRules(accountId);
+
+            return new OkResult();
         }
     }
 }

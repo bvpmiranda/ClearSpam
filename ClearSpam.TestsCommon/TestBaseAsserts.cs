@@ -34,7 +34,6 @@ namespace ClearSpam.TestsCommon
             Assert.AreEqual(expected.Login, actual.Login);
             Assert.AreEqual(expected.Password, actual.Password);
             Assert.AreEqual(expected.WatchedMailbox, actual.WatchedMailbox);
-            Assert.AreEqual(expected.TrashMailbox, actual.TrashMailbox);
         }
 
         protected void AssertRule(Rule expected, RuleDto actual, bool assertId = true)

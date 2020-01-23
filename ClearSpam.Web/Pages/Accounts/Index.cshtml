@@ -7,34 +7,16 @@
 
 <h1>Accounts and Rules</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
+<table class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
+        <tr class="d-flex">
+            <th class="col-6 col-lg-7 col-xl-7">
                 @Html.DisplayNameFor(model => model.Account[0].Name)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Account[0].Server)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Account[0].Port)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Account[0].Ssl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Account[0].Login)
-            </th>
-            <th>
+            <th class="col-4 col-lg-4 col-xl-4">
                 @Html.DisplayNameFor(model => model.Account[0].WatchedMailbox)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Account[0].TrashMailbox)
-            </th>
-            <th></th>
+            <th class="col-2 col-lg-1 col-xl-1"></th>
         </tr>
     </thead>
     <tbody>
@@ -42,39 +24,31 @@
         {
             foreach (var item in Model.Account)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                <tr class="d-flex">
+                    <td class="col-6 col-lg-7 col-xl-7">
+                        <a asp-page="./Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Server)
+                    <td class="col-4 col-lg-4 col-xl-4">
+                        <a asp-page="./Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.WatchedMailbox)</a>
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Port)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ssl)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Login)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.WatchedMailbox)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TrashMailbox)
-                    </td>
-                    <td>
-                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    <td class="col-2 col-lg-1 col-xl-1">
+                        <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>
             }
         }
-        
     </tbody>
 </table>
-<form method="post" asp-page="Index">
-    <input type="submit" value="Process Rules" asp-page-handler="ClearSpam" />
-</form>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 col-lg-2 py-0 px-0">
+            <a class="btn btn-primary" asp-page="Create">Create New</a>
+        </div>
+        <div class="col-6 col-lg-8">
+        </div>
+        <div class="col-3 col-lg-2 py-0 px-0">
+            <a href="#" onclick="processRules('Accounts?handler=ClearSpam'); return false;" class="btn btn-secondary btn-block">Process Rules</a>
+        </div>
+    </div>
+</div>

@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading;
 using System.Threading.Tasks;
 using ClearSpam.Application.Accounts.Queries;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ClearSpam.Web.Pages.Rules
 {
+    [Authorize]
     public class DeleteRuleModel : PageModel
     {
         private readonly IMediator mediator;

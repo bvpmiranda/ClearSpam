@@ -4,16 +4,28 @@ namespace ClearSpam.Application.ClearSpam.Commands
 {
     public class ClearSpamCommand : IRequest
     {
-        public int? Id { get; set; }
+        public string UserId { get; set; }
+        public int? AccountId { get; set; }
+        public int? RuleId { get; set; }
 
         public ClearSpamCommand()
         {
-
         }
 
-        public ClearSpamCommand(int? id)
+        public ClearSpamCommand(string userId)
         {
-            Id = id;
+            UserId = userId;
+        }
+
+        public ClearSpamCommand(int accountId)
+        {
+            AccountId = accountId;
+        }
+
+        public ClearSpamCommand(int accountId, int ruleId)
+        {
+            AccountId = accountId;
+            RuleId = ruleId;
         }
     }
 }

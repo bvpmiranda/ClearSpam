@@ -1,0 +1,33 @@
+﻿@page
+@model ClearSpam.Web.Pages.Rules.DeleteRuleModel
+
+@{
+    ViewData["Title"] = "Delete Rule";
+}
+
+<h1>Delete Rule for Account: @Model.Rule.Account.Name</h1>
+
+<div>
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label asp-for="Rule.Field" class="control-label"></label>
+                <input asp-for="Rule.Field" class="form-control" disabled />
+                <span asp-validation-for="Rule.Field" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="Rule.Content" class="control-label"></label>
+                <input asp-for="Rule.Content" class="form-control" disabled />
+                <span asp-validation-for="Rule.Content" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Rule.Id" />
+        <input type="submit" value="Delete Rule" class="btn btn-danger" /> |
+        <a asp-page="../Accounts/Details" asp-route-id="@Model.Rule.AccountId">Back to List</a>
+    </form>
+</div>

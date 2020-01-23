@@ -76,7 +76,6 @@ namespace ClearSpam.Infrastructure
 
         public void DeleteMessage(uint id)
         {
-            //ImapClient.MoveMessage(id, Account.TrashMailbox);
             ImapClient.DeleteMessage(id);
             ImapClient.Expunge(ImapClient.DefaultMailbox);
         }

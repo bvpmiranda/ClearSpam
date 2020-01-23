@@ -38,7 +38,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -59,7 +58,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -80,7 +78,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -101,7 +98,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -122,7 +118,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -143,7 +138,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -164,7 +158,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -185,7 +178,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Port, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -206,7 +198,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Port, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -227,7 +218,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Port, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -248,7 +238,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Port, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -269,7 +258,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Port, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -290,7 +278,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Port, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -311,7 +298,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Port, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -332,7 +318,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Port, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
         [TestMethod]
@@ -353,73 +338,9 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
             _validator.ShouldNotHaveValidationErrorFor(x => x.Port, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
             _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.TrashMailbox, command);
         }
 
-        [TestMethod]
-        public void Validate_TrashMailboxIsNull_ReturnsFalse()
-        {
-            RepositoryMock.Setup(x => x.Any(It.IsAny<Expression<Func<Account, bool>>>()))
-                          .Returns(false);
-
-            var command = CreateUpdateAccountCommand();
-            command.TrashMailbox = null;
-
-            MapperMock.Setup(x => x.Map<AccountDto>(command)).Returns(command);
-
-            _validator.ShouldHaveValidationErrorFor(x => x.TrashMailbox, command);
-
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Id, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Server, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Port, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-        }
-
-        [TestMethod]
-        public void Validate_TrashMailboxIsEmpty_ReturnsFalse()
-        {
-            RepositoryMock.Setup(x => x.Any(It.IsAny<Expression<Func<Account, bool>>>()))
-                          .Returns(false);
-
-            var command = CreateUpdateAccountCommand();
-            command.TrashMailbox = "";
-
-            MapperMock.Setup(x => x.Map<AccountDto>(command)).Returns(command);
-
-            _validator.ShouldHaveValidationErrorFor(x => x.TrashMailbox, command);
-
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Id, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Server, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Port, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-        }
-
-        [TestMethod]
-        public void Validate_TrashMailboxExceedsLimit_ReturnsFalse()
-        {
-            RepositoryMock.Setup(x => x.Any(It.IsAny<Expression<Func<Account, bool>>>()))
-                          .Returns(false);
-
-            var command = CreateUpdateAccountCommand();
-            command.TrashMailbox = NewGuid(AccountConfigurations.TrashMailboxMaxLength + 1);
-
-            MapperMock.Setup(x => x.Map<AccountDto>(command)).Returns(command);
-
-            _validator.ShouldHaveValidationErrorFor(x => x.TrashMailbox, command);
-
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Id, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Server, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Port, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Login, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Password, command);
-            _validator.ShouldNotHaveValidationErrorFor(x => x.WatchedMailbox, command);
-        }
-
-        private UpdateAccountCommand CreateUpdateAccountCommand(int id = 1, string server = null, short port = 993, bool ssl = true, string login = null, string password = null, string WatchedMailbox = null, string trashMailbox = null)
+        private UpdateAccountCommand CreateUpdateAccountCommand(int id = 1, string server = null, short port = 993, bool ssl = true, string login = null, string password = null, string WatchedMailbox = null)
         {
             if (server == null)
                 server = NewGuid(AccountConfigurations.ServerMaxLength);
@@ -429,8 +350,6 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
                 password = NewGuid(AccountConfigurations.PasswordMaxLength);
             if (WatchedMailbox == null)
                 WatchedMailbox = NewGuid(AccountConfigurations.WatchedMailboxMaxLength);
-            if (trashMailbox == null)
-                trashMailbox = NewGuid(AccountConfigurations.TrashMailboxMaxLength);
 
             var account = new UpdateAccountCommand
             {
@@ -440,8 +359,7 @@ namespace ClearSpam.Application.Tests.Accounts.Commands
                 Ssl = ssl,
                 Login = login,
                 Password = password,
-                WatchedMailbox = WatchedMailbox,
-                TrashMailbox = trashMailbox
+                WatchedMailbox = WatchedMailbox
             };
 
             return account;

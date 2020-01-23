@@ -1,26 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using System;
 
 namespace ClearSpam.SqlMigrations
 {
     public class ContextFactory : IDesignTimeDbContextFactory<ClearSpamContext>
     {
-        public ClearSpamContext CreateDbContext()
+        public ClearSpamContext CreateDbContext(string connectionString)
         {
-            return CreateDbContext(new[] { "" });
-        }
-
-        public ClearSpamContext CreateDbContext(string[] args)
-        {
-            var options = GetOptions();
+            var options = GetOptions(connectionString);
             var context = new ClearSpamContext(options);
 
             return context;
         }
 
-        public static DbContextOptions<Persistence.ClearSpamContext> GetOptions()
+        public ClearSpamContext CreateDbContext(string[] args)
         {
-            var connectionString = ClearSpamContext.GetConnectionString();
+            throw new NotImplementedException();
+        }
+
+        public static DbContextOptions<Persistence.ClearSpamContext> GetOptions(string connectionString)
+        {
             var contextBuilder = new DbContextOptionsBuilder<Persistence.ClearSpamContext>()
                 .UseSqlServer(connectionString);
 

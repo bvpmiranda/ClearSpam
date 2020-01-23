@@ -7,6 +7,7 @@ namespace ClearSpam.Domain.Entities
     public class Account : IEntity
     {
         public int Id { get; set; }
+        public string UserId { get; set; }
         public string Name { get; set; }
         public string Server { get; set; }
         public int Port { get; set; }
@@ -14,7 +15,6 @@ namespace ClearSpam.Domain.Entities
         public string Login { get; set; }
         public string Password { get; set; }
         public string WatchedMailbox { get; set; }
-        public string TrashMailbox { get; set; }
         public ICollection<Rule> Rules { get; set; } = new Collection<Rule>();
     }
 }

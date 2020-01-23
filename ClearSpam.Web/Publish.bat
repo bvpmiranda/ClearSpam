@@ -1,11 +1,12 @@
-﻿@ECHO OFF
+@ECHO OFF
 
-del .\bin\release\netcoreapp2.2\publish\appsettings.json
-del .\bin\release\netcoreapp2.2\publish\appsettings.notebruno.json
-del .\bin\release\netcoreapp2.2\publish\appsettings.zenBookFlip.json
-ren .\bin\release\netcoreapp2.2\publish\appsettings.production.json appsettings.json 
+cd C:\Users\bvpmi\Documents\Publishings\ClearSpam\
+del appsettings.json
+del appsettings.zenBookFlip.json
+copy appsettings.release.json appsettings.json
+del web.release.config
 
-docker build -t clearspam.web ./bin/release/netcoreapp2.2/publish
+docker build -t clearspam.web ./
 
 docker tag clearspam.web registry.heroku.com/clearspam/web
 

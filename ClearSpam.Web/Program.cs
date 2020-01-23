@@ -1,5 +1,4 @@
 ﻿using ClearSpam.Application.Interfaces;
-using ClearSpam.SqlMigrations;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -11,18 +10,11 @@ namespace ClearSpam.Web
 
         public static void Main(string[] args)
         {
-            using (var context = new ContextFactory().CreateDbContext())
-            {
-                ClearSpamMigrations.ApplyMigrations(context);
-            }
-
             CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
-                          .UseStartup<Startup>();
-        }
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
     }
 }

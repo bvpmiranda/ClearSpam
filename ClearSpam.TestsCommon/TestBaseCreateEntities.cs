@@ -5,13 +5,15 @@ namespace ClearSpam.TestsCommon
 {
     public partial class TestBase
     {
-        protected static Account CreateAccount(string server = null, short port = 0, bool ssl = true, string login = null, string password = null, string WatchedMailbox = null, string trashMailBox = null)
+        protected static Account CreateAccount(string userId = null, string server = null, short port = 0, bool ssl = true, string login = null, string password = null, string WatchedMailbox = null)
         {
-            return CreateAccount(id: 1, server, port, ssl, login, password, WatchedMailbox, trashMailBox);
+            return CreateAccount(id: 1, userId, server, port, ssl, login, password, WatchedMailbox);
         }
 
-        protected static Account CreateAccount(int id, string server = null, short port = 0, bool ssl = true, string login = null, string password = null, string WatchedMailbox = null, string trashMailbox = null)
+        protected static Account CreateAccount(int id, string userId = null, string server = null, short port = 0, bool ssl = true, string login = null, string password = null, string WatchedMailbox = null)
         {
+            if (userId == null)
+                userId = NewGuid();
             if (server == null)
                 server = NewGuid(AccountConfigurations.ServerMaxLength);
             if (login == null)
@@ -20,19 +22,17 @@ namespace ClearSpam.TestsCommon
                 password = NewGuid(AccountConfigurations.PasswordMaxLength);
             if (WatchedMailbox == null)
                 WatchedMailbox = NewGuid(AccountConfigurations.WatchedMailboxMaxLength);
-            if (trashMailbox == null)
-                trashMailbox = NewGuid(AccountConfigurations.TrashMailboxMaxLength);
 
             var account = new Account
             {
                 Id = id,
+                UserId = userId,
                 Server = server,
                 Port = port,
                 Ssl = ssl,
                 Login = login,
                 Password = password,
-                WatchedMailbox = WatchedMailbox,
-                TrashMailbox = trashMailbox
+                WatchedMailbox = WatchedMailbox
             };
 
             return account;
