@@ -99,7 +99,7 @@ namespace ClearSpam.Infrastructure
                 {
                     foreach (var to in message.To)
                     {
-                        mailMessage.To.Add(new System.Net.Mail.MailAddress(to.Address, to.DisplayName));
+                        mailMessage.To.Add(new System.Net.Mail.MailAddress(to.Address.Replace(";", ""), to.DisplayName));
                     }
                 }
 
@@ -107,7 +107,7 @@ namespace ClearSpam.Infrastructure
                 {
                     foreach (var replyTo in message.ReplyTo)
                     {
-                        mailMessage.ReplyToList.Add(new System.Net.Mail.MailAddress(replyTo.Address, replyTo.DisplayName));
+                        mailMessage.ReplyToList.Add(new System.Net.Mail.MailAddress(replyTo.Address.Replace(";", ""), replyTo.DisplayName));
                     }
                 }
 
@@ -115,7 +115,7 @@ namespace ClearSpam.Infrastructure
                 {
                     foreach (var cc in message.Cc)
                     {
-                        mailMessage.CC.Add(new System.Net.Mail.MailAddress(cc.Address, cc.DisplayName));
+                        mailMessage.CC.Add(new System.Net.Mail.MailAddress(cc.Address.Replace(";", ""), cc.DisplayName));
                     }
                 }
 
