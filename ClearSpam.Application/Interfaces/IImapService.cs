@@ -8,7 +8,7 @@ namespace ClearSpam.Application.Interfaces
     {
         AccountDto Account { get; set;  }
         IEnumerable<string> GetMailboxesList();
-        IEnumerable<(uint Id, MailMessage Message)> GetMessagesFromWatchedMailbox();
-        void DeleteMessage(uint id);
+        IEnumerable<(long Id, MailMessage Message)> GetMessagesFromWatchedMailbox();
+        void DeleteMessage(long id);
     }
 }

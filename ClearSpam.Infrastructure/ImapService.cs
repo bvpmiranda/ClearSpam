@@ -1,7 +1,6 @@
 ﻿using ClearSpam.Application.Interfaces;
 using ClearSpam.Application.Models;
-using ClearSpam.Domain.Entities;
-using S22.Imap;
+using ImapX;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +31,19 @@ namespace ClearSpam.Infrastructure
                 {
                     try
                     {
-                        ImapClient = new ImapClient(account.Server, account.Port, account.Login, cryptography.Decrypt(account.Password), AuthMethod.Login, account.Ssl);
-                        ImapClient.DefaultMailbox = account.WatchedMailbox;
+                        ImapClient = new ImapClient(account.Server, account.Ssl);
+
+                        if (ImapClient.Connect())
+                        {
+                            if (!ImapClient.Login(account.Login, cryptography.Decrypt(account.Password)))
+                            {
+                                throw new Exception($"Invalid credentials for {account.Name}");
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception($"Unable to connect to server: {account.Server}");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -43,7 +53,7 @@ namespace ClearSpam.Infrastructure
             }
         }
 
-        public IImapClient ImapClient { get; set; }
+        public ImapClient ImapClient { get; set; }
 
         public ImapService(ICryptography cryptography, ILogger logger)
         {
@@ -58,26 +68,74 @@ namespace ClearSpam.Infrastructure
 
         public IEnumerable<string> GetMailboxesList()
         {
-            return ImapClient.ListMailboxes();
+            return ImapClient.Folders.Select(x => x.Name);
         }
 
-        public IEnumerable<(uint Id, MailMessage Message)> GetMessagesFromWatchedMailbox()
+        public IEnumerable<(long Id, MailMessage Message)> GetMessagesFromWatchedMailbox()
         {
-            var messageIds = ImapClient.Search(SearchCondition.All()).ToList();
+            var folder = ImapClient.Folders.FirstOrDefault(x => x.Name == Account.WatchedMailbox);
 
-            var result = new List<(uint Id, MailMessage Message)>();
-            foreach (var messageId in messageIds)
+            var messages = folder.Search("ALL", ImapX.Enums.MessageFetchMode.Tiny);
+
+            var result = new List<(long Id, MailMessage Message)>();
+            foreach (var message in messages)
             {
-                result.Add((messageId, ImapClient.GetMessage(messageId, FetchOptions.HeadersOnly, seen: false)));
+                var mailMessage = new MailMessage
+                {
+                    From = new System.Net.Mail.MailAddress(message.From.Address, message.From.DisplayName),
+                    Subject = message.Subject,
+                    Body = message.Body.HasHtml ? message.Body.Html : message.Body.HasText ? message.Body.Text : null
+                };
+
+                if (message.Headers != null)
+                {
+                    foreach (var header in message.Headers)
+                    {
+                        mailMessage.Headers.Add(header.Key, header.Value);
+                    }
+                }
+
+                if (message.To != null)
+                {
+                    foreach (var to in message.To)
+                    {
+                        mailMessage.To.Add(new System.Net.Mail.MailAddress(to.Address, to.DisplayName));
+                    }
+                }
+
+                if (message.ReplyTo != null)
+                {
+                    foreach (var replyTo in message.ReplyTo)
+                    {
+                        mailMessage.ReplyToList.Add(new System.Net.Mail.MailAddress(replyTo.Address, replyTo.DisplayName));
+                    }
+                }
+
+                if (message.Cc != null)
+                {
+                    foreach (var cc in message.Cc)
+                    {
+                        mailMessage.CC.Add(new System.Net.Mail.MailAddress(cc.Address, cc.DisplayName));
+                    }
+                }
+
+                result.Add((message.UId, mailMessage));
             }
 
             return result;
         }
 
-        public void DeleteMessage(uint id)
+        public void DeleteMessage(long id)
         {
-            ImapClient.DeleteMessage(id);
-            ImapClient.Expunge(ImapClient.DefaultMailbox);
+            var folder = ImapClient.Folders.FirstOrDefault(x => x.Name == Account.WatchedMailbox);
+
+            var message = folder.Search(new[] { id }, ImapX.Enums.MessageFetchMode.Tiny).FirstOrDefault();
+
+            if (message != null)
+            {
+                message.Seen = true;
+                message.Remove();
+            }
         }
     }
 }

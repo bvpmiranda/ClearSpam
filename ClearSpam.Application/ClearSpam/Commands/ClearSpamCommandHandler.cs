@@ -127,7 +127,19 @@ namespace ClearSpam.Application.ClearSpam.Commands
 
         private bool DeleteMessageBasedOnFrom(MailMessage message, string content)
         {
-            var from = string.Join("", message.Headers.GetValues("From")).Replace("\"", "");
+            var from = message.From.Address;
+
+            if (from.ToLower().Contains(content))
+            {
+                logger.Info($"Deleting message based on from: {from}");
+
+                return true;
+            }
+
+            if (message.Headers == null)
+                return false;
+
+            from = string.Join("", message.Headers.GetValues("From")).Replace("\"", "");
 
             if (from.ToLower().Contains(content))
             {
@@ -163,15 +175,15 @@ namespace ClearSpam.Application.ClearSpam.Commands
 
         private bool DeleteMessageBasedOnSubject(MailMessage message, string content)
         {
-            var contentEncoding = Encoding.UTF8;
-            var contentBytes = contentEncoding.GetBytes(content);
+            //var contentEncoding = Encoding.UTF8;
+            //var contentBytes = contentEncoding.GetBytes(content);
 
-            var subjectEncoding = message.SubjectEncoding;
-            var subjectBytes = Encoding.Convert(contentEncoding, subjectEncoding, contentBytes);
+            //var subjectEncoding = message.SubjectEncoding;
+            //var subjectBytes = Encoding.Convert(contentEncoding, subjectEncoding, contentBytes);
 
-            var subject = subjectEncoding.GetString(subjectBytes);
+            //var subject = subjectEncoding.GetString(subjectBytes);
 
-            if (message.Subject.ToLower().Contains(subject))
+            if (message.Subject.ToLower().Contains(content))
             {
                 logger.Info($"Deleting message based on subject: {message.Subject}");
 

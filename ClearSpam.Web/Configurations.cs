@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
+using System.Net;
 using System.Reflection;
 
 namespace ClearSpam.Web
@@ -23,6 +24,8 @@ namespace ClearSpam.Web
     {
         public static void ConfigureDependencies(this IServiceCollection services, IConfiguration configuration)
         {
+            System.Net.ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+
             services.ConfigureMediatr();
 
             services.AddAutoMapper(typeof(AccountMappings).Assembly);
@@ -34,6 +37,8 @@ namespace ClearSpam.Web
             services.AddScoped<IRepository, Repository>();
             services.AddSingleton<ICryptography, Cryptography>();
             services.AddScoped<IImapService, ImapService>();
+
+            
 
             services.AddScoped<Application.Interfaces.ILogger, ClearSpam.Infrastructure.Logger>();
 

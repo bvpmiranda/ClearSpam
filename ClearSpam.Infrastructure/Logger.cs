@@ -14,68 +14,56 @@ namespace ClearSpam.Infrastructure
             this.clearSpamConfigurations = clearSpamConfigurations;
         }
 
-        public void Debug(string message)
-        {
-            logger.Debug(message);
-        }
-
         public void Debug(string message, params object[] objects)
         {
+            Console.WriteLine($"DEBUG: {message}: {objects}");
             logger.Debug(message, objects);
-        }
-
-        public void Error(string message)
-        {
-            logger.Error(message);
         }
 
         public void Error(string message, params object[] objects)
         {
+            Console.WriteLine($"ERROR: {message}: {objects}");
             logger.Error(message, objects);
         }
 
         public void Exception(string requestName, Exception exception)
         {
-            logger.Error("Handled {@requestName} threw an exception: {@exception}",
-                         requestName,
-                         exception.Message);
+            var message = $"Handled {requestName} threw an exception: {exception}";
+
+            Console.WriteLine($"ERROR: {message}");
+            logger.Error(message);
         }
 
         public void Handled(string requestName, object response, long ellapsedMilliseconds)
         {
-            logger.Info("Handled {@requestName} in {@timeInMilliseconds}ms: {@response}",
-                        requestName,
-                        ellapsedMilliseconds,
-                        response);
+            var message = $"Handled {requestName} in {ellapsedMilliseconds}ms: {response}";
+            Console.WriteLine($"INFO: {message}");
+            logger.Info(message);
 
             if (ellapsedMilliseconds > clearSpamConfigurations.RequestSLA)
             {
-                logger.Warn($"\tRequest handled in longer than {clearSpamConfigurations.RequestSLA}ms");
+                message = $"\tRequest handled in longer than {clearSpamConfigurations.RequestSLA}ms";
+                Console.WriteLine($"WARNING: {message}");
+                logger.Warn(message);
             }
         }
 
         public void Handling(string requestName, object request)
         {
-            logger.Info("Handling {@requestName}: {@request}", requestName, request);
-        }
-
-        public void Info(string message)
-        {
+            var message = $"Handling {requestName}: {request}";
+            Console.WriteLine($"INFO: {message}");
             logger.Info(message);
         }
 
         public void Info(string message, params object[] objects)
         {
+            Console.WriteLine($"INFO: {message}: {objects}");
             logger.Info(message, objects);
-        }
-
-        public void Warning(string message)
-        {
-            logger.Warn(message);
         }
 
         public void Warning(string message, params object[] objects)
         {
+            Console.WriteLine($"WARNING: {message}: {objects}");
             logger.Warn(message, objects);
         }
     }
