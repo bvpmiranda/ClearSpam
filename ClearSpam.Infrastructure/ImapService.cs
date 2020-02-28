@@ -83,9 +83,16 @@ namespace ClearSpam.Infrastructure
                 var mailMessage = new MailMessage
                 {
                     From = new System.Net.Mail.MailAddress(message.From.Address, message.From.DisplayName),
-                    Subject = message.Subject,
-                    Body = message.Body.HasHtml ? message.Body.Html : message.Body.HasText ? message.Body.Text : null
+                    Subject = message.Subject
                 };
+
+                try
+                {
+                    mailMessage.Body = message.Body.HasHtml ? message.Body.Html : message.Body.HasText ? message.Body.Text : null;
+                }
+                catch (Exception)
+                {
+                }
 
                 if (message.Headers != null)
                 {
