@@ -82,7 +82,7 @@ namespace ClearSpam.Infrastructure
             {
                 var mailMessage = new MailMessage
                 {
-                    From = new System.Net.Mail.MailAddress(message.From.Address, message.From.DisplayName),
+                    From = new System.Net.Mail.MailAddress(CleanupEmailAddress(message.From.Address), message.From.DisplayName),
                     Subject = message.Subject
                 };
 
@@ -98,7 +98,13 @@ namespace ClearSpam.Infrastructure
                 {
                     foreach (var header in message.Headers)
                     {
-                        mailMessage.Headers.Add(header.Key, header.Value);
+                        try
+                        {
+                            mailMessage.Headers.Add(header.Key, header.Value);
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
                 }
 
@@ -106,7 +112,13 @@ namespace ClearSpam.Infrastructure
                 {
                     foreach (var to in message.To)
                     {
-                        mailMessage.To.Add(new System.Net.Mail.MailAddress(to.Address.Replace(";", ""), to.DisplayName));
+                        try
+                        {
+                            mailMessage.To.Add(new System.Net.Mail.MailAddress(CleanupEmailAddress(to.Address), to.DisplayName));
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
                 }
 
@@ -114,7 +126,13 @@ namespace ClearSpam.Infrastructure
                 {
                     foreach (var replyTo in message.ReplyTo)
                     {
-                        mailMessage.ReplyToList.Add(new System.Net.Mail.MailAddress(replyTo.Address.Replace(";", ""), replyTo.DisplayName));
+                        try
+                        {
+                            mailMessage.ReplyToList.Add(new System.Net.Mail.MailAddress(CleanupEmailAddress(replyTo.Address), replyTo.DisplayName));
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
                 }
 
@@ -122,7 +140,13 @@ namespace ClearSpam.Infrastructure
                 {
                     foreach (var cc in message.Cc)
                     {
-                        mailMessage.CC.Add(new System.Net.Mail.MailAddress(cc.Address.Replace(";", ""), cc.DisplayName));
+                        try
+                        {
+                            mailMessage.CC.Add(new System.Net.Mail.MailAddress(CleanupEmailAddress(cc.Address), cc.DisplayName));
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
                 }
 
@@ -143,6 +167,11 @@ namespace ClearSpam.Infrastructure
                 message.Seen = true;
                 message.Remove();
             }
+        }
+
+        private string CleanupEmailAddress(string emailaddress)
+        {
+            return emailaddress.Replace(":", "").Replace(";", "").Trim();
         }
     }
 }
