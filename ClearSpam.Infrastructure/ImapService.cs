@@ -31,7 +31,9 @@ namespace ClearSpam.Infrastructure
                 {
                     try
                     {
-                        ImapClient = new ImapClient(account.Server, account.Ssl);
+                        var protocols = System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12 |
+                                        System.Security.Authentication.SslProtocols.Ssl2 | System.Security.Authentication.SslProtocols.Ssl3;
+                        ImapClient = new ImapClient(account.Server, account.Port, protocols, account.Ssl);
 
                         if (ImapClient.Connect())
                         {

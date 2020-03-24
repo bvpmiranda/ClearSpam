@@ -8,7 +8,6 @@ using MediatR;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,17 +15,17 @@ namespace ClearSpam.Application.ClearSpam.Commands
 {
     public class ClearSpamCommandHandler : IRequestHandler<ClearSpamCommand>
     {
-        private readonly IRepository repository;
-        private readonly IMapper mapper;
-        private readonly IImapService imapService;
-        private readonly ILogger logger;
+        private readonly IRepository _repository;
+        private readonly IMapper _mapper;
+        private readonly IImapService _imapService;
+        private readonly ILogger _logger;
 
         public ClearSpamCommandHandler(IRepository repository, IMapper mapper, IImapService imapService, ILogger logger)
         {
-            this.repository = repository;
-            this.mapper = mapper;
-            this.imapService = imapService;
-            this.logger = logger;
+            _repository = repository;
+            _mapper = mapper;
+            _imapService = imapService;
+            _logger = logger;
         }
 
         public async Task<Unit> Handle(ClearSpamCommand request, CancellationToken cancellationToken)
@@ -35,7 +34,7 @@ namespace ClearSpam.Application.ClearSpam.Commands
 
             if (request.AccountId.HasValue)
             {
-                var account = repository.Get<Account>(request.AccountId.Value);
+                var account = _repository.Get<Account>(request.AccountId.Value);
 
                 if (account != null)
                     accounts.Add(account);
@@ -47,13 +46,13 @@ namespace ClearSpam.Application.ClearSpam.Commands
 
             if (!string.IsNullOrWhiteSpace(request.UserId))
             {
-                accounts.AddRange(repository.Get<Account>(x => x.UserId == request.UserId).ToList());
+                accounts.AddRange(_repository.Get<Account>(x => x.UserId == request.UserId).ToList());
                 ProcessAccounts(accounts);
 
                 return Unit.Value;
             }
 
-            accounts.AddRange(repository.Get<Account>());
+            accounts.AddRange(_repository.Get<Account>());
             ProcessAccounts(accounts);
 
             return Unit.Value;
@@ -67,26 +66,26 @@ namespace ClearSpam.Application.ClearSpam.Commands
                 {
                     if (ruleId.HasValue)
                     {
-                        account.Rules = repository.Get<Rule>(x => x.AccountId == account.Id && x.Id == ruleId.Value).ToList();
+                        account.Rules = _repository.Get<Rule>(x => x.AccountId == account.Id && x.Id == ruleId.Value).ToList();
                     }
                     else
                     {
-                        account.Rules = repository.Get<Rule>(x => x.AccountId == account.Id).ToList();
+                        account.Rules = _repository.Get<Rule>(x => x.AccountId == account.Id).ToList();
                     }
 
-                    imapService.Account = mapper.Map<AccountDto>(account);
-                    var messages = imapService.GetMessagesFromWatchedMailbox();
+                    _imapService.Account = _mapper.Map<AccountDto>(account);
+                    var messages = _imapService.GetMessagesFromWatchedMailbox();
                     foreach (var (MessageId, Message) in messages)
                     {
-                        if (DeleteMessage(Message, imapService.Account.Rules))
+                        if (DeleteMessage(Message, _imapService.Account.Rules))
                         {
-                            imapService.DeleteMessage(MessageId);
+                            _imapService.DeleteMessage(MessageId);
                         }
                     }
                 }
                 catch (System.Exception ex)
                 {
-                    logger.Error(ex.Message);
+                    _logger.Error(ex.Message);
                 }
             }
         }
@@ -131,7 +130,7 @@ namespace ClearSpam.Application.ClearSpam.Commands
 
             if (from.ToLower().Contains(content))
             {
-                logger.Info($"Deleting message based on from: {from}");
+                _logger.Info($"Deleting message based on from: {from}");
 
                 return true;
             }
@@ -143,7 +142,7 @@ namespace ClearSpam.Application.ClearSpam.Commands
 
             if (from.ToLower().Contains(content))
             {
-                logger.Info($"Deleting message based on from: {from}");
+                _logger.Info($"Deleting message based on from: {from}");
 
                 return true;
             }
@@ -157,14 +156,14 @@ namespace ClearSpam.Application.ClearSpam.Commands
             {
                 if (ma.Address.ToLower().Contains(content))
                 {
-                    logger.Info($"Deleting message based on address of reply to list entry: {ma.Address}");
+                    _logger.Info($"Deleting message based on address of reply to list entry: {ma.Address}");
 
                     return true;
                 }
 
                 if (ma.DisplayName.ToLower().Contains(content))
                 {
-                    logger.Info($"Deleting message based on display name of reply to list entry: {ma.DisplayName}");
+                    _logger.Info($"Deleting message based on display name of reply to list entry: {ma.DisplayName}");
 
                     return true;
                 }
@@ -175,17 +174,9 @@ namespace ClearSpam.Application.ClearSpam.Commands
 
         private bool DeleteMessageBasedOnSubject(MailMessage message, string content)
         {
-            //var contentEncoding = Encoding.UTF8;
-            //var contentBytes = contentEncoding.GetBytes(content);
-
-            //var subjectEncoding = message.SubjectEncoding;
-            //var subjectBytes = Encoding.Convert(contentEncoding, subjectEncoding, contentBytes);
-
-            //var subject = subjectEncoding.GetString(subjectBytes);
-
             if (message.Subject.ToLower().Contains(content))
             {
-                logger.Info($"Deleting message based on subject: {message.Subject}");
+                _logger.Info($"Deleting message based on subject: {message.Subject}");
 
                 return true;
             }
@@ -199,14 +190,14 @@ namespace ClearSpam.Application.ClearSpam.Commands
             {
                 if (ma.Address.ToLower().Contains(content))
                 {
-                    logger.Info($"Deleting message based on address of to list entry: {ma.Address}");
+                    _logger.Info($"Deleting message based on address of to list entry: {ma.Address}");
 
                     return true;
                 }
 
                 if (ma.DisplayName.ToLower().Contains(content))
                 {
-                    logger.Info($"Deleting message based on display name of to list entry: {ma.DisplayName}");
+                    _logger.Info($"Deleting message based on display name of to list entry: {ma.DisplayName}");
 
                     return true;
                 }

@@ -8,6 +8,8 @@
         
         void Restart();
 
+        void ProcessRules();
+
         void ProcessRules(string userId);
 
         void ProcessRules(int accountId);

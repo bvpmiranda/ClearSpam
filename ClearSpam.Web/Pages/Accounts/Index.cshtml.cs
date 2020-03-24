@@ -18,27 +18,27 @@ namespace ClearSpam.Web.Pages.Accounts
     [Authorize]
     public class IndexModel : PageModel
     {
-        private readonly IMediator mediator;
-        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IMediator _mediator;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public IndexModel(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
-            this.mediator = mediator;
-            this.httpContextAccessor = httpContextAccessor;
+            _mediator = mediator;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public IList<AccountDto> Account { get; set; }
 
         public async Task OnGetAsync()
         {
-            var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var query = new GetAccountsQuery(userId);
-            Account = (await mediator.Send(query, CancellationToken.None)).ToList();
+            Account = (await _mediator.Send(query, CancellationToken.None)).ToList();
         }
 
         public IActionResult OnPostClearSpam()
         {
-            var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             Program.ClearSpamService.ProcessRules(userId);
 
             return RedirectToPage("./Index");

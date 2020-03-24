@@ -9,31 +9,33 @@ namespace ClearSpam.Application.Services
 {
     public class ClearSpamService : IClearSpamService, IDisposable
     {
-        private readonly IMediator mediator;
-        private readonly int periodInSeconds;
-        private readonly Timer timer;
+        private readonly IMediator _mediator;
+        private readonly int _periodInSeconds;
+        private readonly Timer _timer;
 
-        private bool processing;
+        private bool _processing;
 
-        private bool disposed = false;
+        private bool _disposed = false;
 
         public ClearSpamService(IMediator mediator, IClearSpamConfigurations configuration)
         {
-            this.mediator = mediator;
-            periodInSeconds = configuration.PeriodInSeconds;
+            _mediator = mediator;
+            _periodInSeconds = configuration.PeriodInSeconds;
 
-            timer = new Timer(new TimerCallback(ClearSpam), state: null, dueTime: Timeout.Infinite, period: Timeout.Infinite);
+            _timer = new Timer(new TimerCallback(ClearSpam), state: null, dueTime: Timeout.Infinite, period: Timeout.Infinite);
         }
 
         public void Start()
         {
-            if (periodInSeconds > 0)
-                timer.Change(dueTime: 0, periodInSeconds * 1000);
+            ProcessRules();
+
+            if (_periodInSeconds > 0)
+                _timer.Change(dueTime: 0, _periodInSeconds * 1000);
         }
 
         public void Stop()
         {
-            timer.Change(dueTime: Timeout.Infinite, period: Timeout.Infinite);
+            _timer.Change(dueTime: Timeout.Infinite, period: Timeout.Infinite);
         }
 
         public void Restart()
@@ -42,11 +44,19 @@ namespace ClearSpam.Application.Services
             Start();
         }
 
+        public void ProcessRules()
+        {
+            Task.Run(() => {
+                var clearSpamCommand = new ClearSpamCommand();
+                _mediator.Send(clearSpamCommand, CancellationToken.None);
+            });
+        }
+
         public void ProcessRules(string userId)
         {
             Task.Run(() => {
                 var clearSpamCommand = new ClearSpamCommand(userId);
-                mediator.Send(clearSpamCommand, CancellationToken.None);
+                _mediator.Send(clearSpamCommand, CancellationToken.None);
             });
         }
 
@@ -54,7 +64,7 @@ namespace ClearSpam.Application.Services
         {
             Task.Run(() => {
                 var clearSpamCommand = new ClearSpamCommand(accountId);
-                mediator.Send(clearSpamCommand, CancellationToken.None);
+                _mediator.Send(clearSpamCommand, CancellationToken.None);
             });
         }
 
@@ -62,7 +72,7 @@ namespace ClearSpam.Application.Services
         {
             Task.Run(() => {
                 var clearSpamCommand = new ClearSpamCommand(accountId, ruleId);
-                mediator.Send(clearSpamCommand, CancellationToken.None);
+                _mediator.Send(clearSpamCommand, CancellationToken.None);
             });
         }
 
@@ -74,26 +84,26 @@ namespace ClearSpam.Application.Services
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!this._disposed)
             {
                 if (disposing)
-                    timer.Dispose();
+                    _timer.Dispose();
 
-                disposed = true;
+                _disposed = true;
             }
         }
 
         private void ClearSpam(object state = null)
         {
-            if (processing)
+            if (_processing)
                 return;
 
-            processing = true;
+            _processing = true;
 
             var clearSpamCommand = new ClearSpamCommand();
-            mediator.Send(clearSpamCommand, CancellationToken.None);
+            _mediator.Send(clearSpamCommand, CancellationToken.None);
 
-            processing = false;
+            _processing = false;
         }
     }
 }
