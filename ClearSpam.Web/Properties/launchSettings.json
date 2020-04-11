@@ -1,9 +1,9 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://localhost/ClearSpam",
+      "applicationUrl": "http://localhost/ClearSpamDesenv",
       "sslPort": 0
     },
     "iisExpress": {
