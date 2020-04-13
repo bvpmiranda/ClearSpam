@@ -70,7 +70,7 @@
         <div class="col-12">
             <div class="form-group">
                 <label asp-for="Account.WatchedMailbox" class="control-label"></label>
-                @if (Model.Mailboxes == null)
+                @if (Model.Mailboxes == null || !Model.Mailboxes.Any())
                 {
                     <input asp-for="Account.WatchedMailbox" class="form-control" />
                 }

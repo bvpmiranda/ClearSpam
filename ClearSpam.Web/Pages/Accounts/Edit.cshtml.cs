@@ -16,13 +16,13 @@ namespace ClearSpam.Web.Pages.Accounts
     [Authorize]
     public class EditModel : PageModel
     {
-        private readonly IMediator mediator;
-        private readonly IMapper mapper;
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
         public EditModel(IMediator mediator, IMapper mapper)
         {
-            this.mediator = mediator;
-            this.mapper = mapper;
+            this._mediator = mediator;
+            this._mapper = mapper;
         }
 
         [BindProperty]
@@ -34,7 +34,7 @@ namespace ClearSpam.Web.Pages.Accounts
             try
             {
                 var accountQuery = new GetAccountQuery(id.GetValueOrDefault());
-                Account = await mediator.Send(accountQuery, CancellationToken.None);
+                Account = await _mediator.Send(accountQuery, CancellationToken.None);
             }
             catch (NotFoundException)
             {
@@ -44,7 +44,7 @@ namespace ClearSpam.Web.Pages.Accounts
             try
             {
                 var mailboxesQuery = new GetMailboxesQuery(Account);
-                Mailboxes = await mediator.Send(mailboxesQuery, CancellationToken.None);
+                Mailboxes = await _mediator.Send(mailboxesQuery, CancellationToken.None);
             }
             catch (System.Exception)
             {
@@ -58,8 +58,8 @@ namespace ClearSpam.Web.Pages.Accounts
         {
             try
             {
-                var command = mapper.Map<UpdateAccountCommand>(Account);
-                await mediator.Send(command, CancellationToken.None);
+                var command = _mapper.Map<UpdateAccountCommand>(Account);
+                await _mediator.Send(command, CancellationToken.None);
             }
             catch (NotFoundException)
             {

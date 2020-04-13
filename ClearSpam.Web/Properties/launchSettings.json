@@ -22,6 +22,7 @@
     "ClearSpam.Web": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "/Accounts/Index",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -29,6 +30,8 @@
     },
     "IIS": {
       "commandName": "IIS",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost/ClearSpamDesenv",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
