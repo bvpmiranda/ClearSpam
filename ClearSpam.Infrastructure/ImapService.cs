@@ -10,46 +10,46 @@ namespace ClearSpam.Infrastructure
 {
     public class ImapService : IImapService, IDisposable
     {
-        private AccountDto account;
-        private readonly ICryptography cryptography;
-        private readonly ILogger logger;
+        private AccountDto _account;
+        private readonly ICryptography _cryptography;
+        private readonly ILogger _logger;
 
         public AccountDto Account
         {
             get
             {
-                return account;
+                return _account;
             }
 
             set
             {
-                account = value;
+                _account = value;
 
                 ImapClient = null;
 
-                if (account != null)
+                if (_account != null)
                 {
                     try
                     {
                         var protocols = System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12 |
                                         System.Security.Authentication.SslProtocols.Ssl2 | System.Security.Authentication.SslProtocols.Ssl3;
-                        ImapClient = new ImapClient(account.Server, account.Port, protocols, account.Ssl);
+                        ImapClient = new ImapClient(_account.Server, _account.Port, protocols, _account.Ssl);
 
                         if (ImapClient.Connect())
                         {
-                            if (!ImapClient.Login(account.Login, cryptography.Decrypt(account.Password)))
+                            if (!ImapClient.Login(_account.Login, _cryptography.Decrypt(_account.Password)))
                             {
-                                throw new Exception($"Invalid credentials for {account.Name}");
+                                throw new Exception($"Invalid credentials for {_account.Name}");
                             }
                         }
                         else
                         {
-                            throw new Exception($"Unable to connect to server: {account.Server}");
+                            throw new Exception($"Unable to connect to server: {_account.Server}");
                         }
                     }
                     catch (Exception ex)
                     {
-                        logger?.Error(ex.Message);
+                        _logger?.Error(ex.Message);
                     }
                 }
             }
@@ -59,8 +59,8 @@ namespace ClearSpam.Infrastructure
 
         public ImapService(ICryptography cryptography, ILogger logger)
         {
-            this.cryptography = cryptography ?? throw new ArgumentNullException(nameof(cryptography));
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this._cryptography = cryptography ?? throw new ArgumentNullException(nameof(cryptography));
+            this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public void Dispose()
@@ -73,7 +73,7 @@ namespace ClearSpam.Infrastructure
             return ImapClient.Folders.Select(x => x.Name);
         }
 
-        public IEnumerable<(long Id, MailMessage Message)> GetMessagesFromWatchedMailbox()
+        public IList<(long Id, MailMessage Message)> GetMessagesFromWatchedMailbox()
         {
             var folder = ImapClient.Folders.FirstOrDefault(x => x.Name == Account.WatchedMailbox);
 
