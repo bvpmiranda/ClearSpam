@@ -4,7 +4,7 @@ namespace ClearSpam.Domain.Entities
 {
     public class Rule : IEntity
     {
-        private Account account;
+        private Account _account;
 
         public int Id { get; set; }
         public int AccountId { get; set; }
@@ -12,15 +12,15 @@ namespace ClearSpam.Domain.Entities
         {
             get
             {
-                return account;
+                return _account;
             }
             set
             {
-                account = value;
+                _account = value;
 
-                if (account != null)
+                if (_account != null)
                 {
-                    AccountId = account.Id;
+                    AccountId = _account.Id;
                 }
             }
         }

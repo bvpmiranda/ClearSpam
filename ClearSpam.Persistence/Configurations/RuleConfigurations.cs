@@ -21,7 +21,7 @@ namespace ClearSpam.Persistence.Configurations
             builder.Property(x => x.Content)
                 .IsRequired()
                 .HasMaxLength(Domain.Configurations.RuleConfigurations.ContentMaxLength)
-                .IsUnicode(false);
+                .IsUnicode(true);
 
             builder.HasOne(x => x.Account)
                 .WithMany(x => x.Rules);

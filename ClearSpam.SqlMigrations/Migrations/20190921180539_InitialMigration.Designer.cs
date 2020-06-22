@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ClearSpam.SqlMigrations.Migrations
 {
-    [DbContext(typeof(ClearSpamContext))]
+    [DbContext(typeof(ClearSpamMigrationContext))]
     [Migration("20190921180539_InitialMigration")]
     partial class InitialMigration
     {

@@ -83,7 +83,7 @@ namespace ClearSpam.Application.ClearSpam.Commands
             }
             catch (System.Exception ex)
             {
-                _logger.Error(ex.Message);
+                _logger.Error($"{account.Name}: {ex.Message}");
             }
         }
 
@@ -175,6 +175,13 @@ namespace ClearSpam.Application.ClearSpam.Commands
             if (from.ToLower().Contains(content))
             {
                 _logger.Info($"Deleting message based on from: {from}");
+
+                return true;
+            }
+
+            if (message.From.DisplayName.ToLower().Contains(content))
+            {
+                _logger.Info($"Deleting message based on display name of from: {message.From.DisplayName}");
 
                 return true;
             }

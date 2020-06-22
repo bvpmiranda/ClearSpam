@@ -8,11 +8,11 @@ namespace ClearSpam.Persistence
 {
     public class ClearSpamContext : IdentityDbContext
     {
-        private readonly IClearSpamConfigurations configurations;
+        private readonly IClearSpamConfigurations _configurations;
 
         public ClearSpamContext(DbContextOptions<ClearSpamContext> options, IClearSpamConfigurations configurations) : base(options)
         {
-            this.configurations = configurations;
+            this._configurations = configurations;
         }
 
         public virtual DbSet<Account> Accounts { get; set; }
@@ -23,7 +23,7 @@ namespace ClearSpam.Persistence
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(configurations.ConnectionString);
+                optionsBuilder.UseSqlServer(_configurations.ConnectionString);
             }
         }
 

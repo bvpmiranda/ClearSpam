@@ -4,7 +4,7 @@ namespace ClearSpam.SqlMigrations
 {
     public static class ClearSpamMigrations
     {
-        public static void ApplyMigrations(ClearSpamContext context)
+        public static void ApplyMigrations(ClearSpamMigrationContext context)
         {
             context.Database.Migrate();
         }

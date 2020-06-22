@@ -8,7 +8,7 @@ namespace ClearSpam.SqlMigrations
         static void Main(string[] args)
         {
             var configurations = new Configurations();
-            using (var context = new ContextFactory().CreateDbContext(configurations.ConnectionString))
+            using (var context = new ContextFactory().CreateDbContext(new[] { configurations.ConnectionString }))
             {
                 Console.WriteLine("Applying ClearSpam Migrations");
                 ClearSpamMigrations.ApplyMigrations(context);
