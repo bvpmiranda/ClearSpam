@@ -242,5 +242,5 @@ ModelManifest.xml
 .fake/
 
 
-appsettings.notebruno.json
+appsettings.Development.json
 /WebApplication1

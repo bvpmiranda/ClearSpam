@@ -23,7 +23,7 @@ namespace ClearSpam.Persistence
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(_configurations.ConnectionString);
+                optionsBuilder.UseMySql(_configurations.ConnectionString);
             }
         }
 

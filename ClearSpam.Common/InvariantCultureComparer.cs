@@ -5,16 +5,16 @@ namespace ClearSpam.Common
 {
     public class InvariantCultureComparer : Comparer<string>
     {
-        private readonly CompareInfo compareInfo;
+        private readonly CompareInfo _compareInfo;
 
         public InvariantCultureComparer()
         {
-            compareInfo = CompareInfo.GetCompareInfo(CultureInfo.InvariantCulture.Name);
+            _compareInfo = CompareInfo.GetCompareInfo(CultureInfo.InvariantCulture.Name);
         }
 
         public override int Compare(string x, string y)
         {
-            return compareInfo.Compare(x, y, CompareOptions.OrdinalIgnoreCase);
+            return _compareInfo.Compare(x, y, CompareOptions.OrdinalIgnoreCase);
         }
     }
 }

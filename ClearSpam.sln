@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29306.81
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{A1B5DC96-261E-43F1-B387-F6C09DE0561E}"
 EndProject
@@ -37,7 +37,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClearSpam.SqlMigrations", "ClearSpam.SqlMigrations\ClearSpam.SqlMigrations.csproj", "{FB6391C6-44B6-4D73-AC20-59E856E3D0B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearSpam.Web", "ClearSpam.Web\ClearSpam.Web.csproj", "{19D02502-E044-4491-AF54-8E536EF9A8CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClearSpam.Web", "ClearSpam.Web\ClearSpam.Web.csproj", "{19D02502-E044-4491-AF54-8E536EF9A8CB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClearSpam.Common.Tests", "ClearSpam.Common.Tests\ClearSpam.Common.Tests.csproj", "{AE0C5662-32F0-47FF-984E-25E7649CB5D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +87,10 @@ Global
 		{19D02502-E044-4491-AF54-8E536EF9A8CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19D02502-E044-4491-AF54-8E536EF9A8CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19D02502-E044-4491-AF54-8E536EF9A8CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE0C5662-32F0-47FF-984E-25E7649CB5D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE0C5662-32F0-47FF-984E-25E7649CB5D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE0C5662-32F0-47FF-984E-25E7649CB5D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE0C5662-32F0-47FF-984E-25E7649CB5D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +109,7 @@ Global
 		{3876A9C6-80B6-4A8F-97E8-563515C8A934} = {D3954A82-F62C-45D7-BF8C-4EB03BF6D26E}
 		{FB6391C6-44B6-4D73-AC20-59E856E3D0B7} = {2EF7D02A-BC82-4147-BDD7-DC1C1C936C0D}
 		{19D02502-E044-4491-AF54-8E536EF9A8CB} = {5A0FF8C4-54DF-4621-831B-74D0A0A876DF}
+		{AE0C5662-32F0-47FF-984E-25E7649CB5D1} = {806D2406-44D9-4589-844E-53E8AD8DF06E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED6C3A1F-44FC-40D6-98B9-25250782E2E2}

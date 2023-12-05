@@ -1,6 +1,6 @@
 ﻿using ClearSpam.Common;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace ClearSpam.SqlMigrations.Migrations
 {
@@ -13,7 +13,7 @@ namespace ClearSpam.SqlMigrations.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<string>(unicode: true, maxLength: 450, nullable: false),
                     Name = table.Column<string>(unicode: false, maxLength: 255, nullable: false),
                     Server = table.Column<string>(unicode: false, maxLength: 255, nullable: false),
@@ -41,7 +41,7 @@ namespace ClearSpam.SqlMigrations.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(unicode: false, maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -56,7 +56,7 @@ namespace ClearSpam.SqlMigrations.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     AccountId = table.Column<int>(nullable: false),
                     Field = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
                     Content = table.Column<string>(unicode: false, maxLength: 255, nullable: false)

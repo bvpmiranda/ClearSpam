@@ -31,9 +31,13 @@ namespace ClearSpam.Infrastructure
                 {
                     try
                     {
-                        var protocols = System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12 |
+                        var protocols = System.Security.Authentication.SslProtocols.Default |
+                                        System.Security.Authentication.SslProtocols.Tls | System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Tls12 |
                                         System.Security.Authentication.SslProtocols.Ssl2 | System.Security.Authentication.SslProtocols.Ssl3;
-                        ImapClient = new ImapClient(_account.Server, _account.Port, protocols, _account.Ssl);
+                        ImapClient = new ImapClient(_account.Server, _account.Port, _account.Ssl)
+                        {
+                            SslProtocol = protocols
+                        };
 
                         if (ImapClient.Connect())
                         {
@@ -77,7 +81,7 @@ namespace ClearSpam.Infrastructure
         {
             var folder = ImapClient.Folders.FirstOrDefault(x => x.Name == Account.WatchedMailbox);
 
-            var messages = folder.Search("ALL", ImapX.Enums.MessageFetchMode.Tiny);
+            var messages = folder?.Search("ALL", ImapX.Enums.MessageFetchMode.Tiny) ?? Array.Empty<Message>();
 
             var result = new List<(long Id, MailMessage Message)>();
             foreach (var message in messages)

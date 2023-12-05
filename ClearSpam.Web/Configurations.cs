@@ -61,12 +61,12 @@ namespace ClearSpam.Web
             var clearSpamConfigurations = provider.GetService<IClearSpamConfigurations>();
             var connectionString = clearSpamConfigurations.ConnectionString;
 
-            using (var context = new SqlMigrations.ContextFactory().CreateDbContext(connectionString))
-            {
-                SqlMigrations.ClearSpamMigrations.ApplyMigrations(context);
-            }
+            //using (var context = new SqlMigrations.ContextFactory().CreateDbContext(connectionString))
+            //{
+            //    SqlMigrations.ClearSpamMigrations.ApplyMigrations(context);
+            //}
 
-            services.AddDbContext<ClearSpamContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<ClearSpamContext>(options => options.UseMySql(connectionString));
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)

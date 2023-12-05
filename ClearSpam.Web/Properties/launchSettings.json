@@ -22,7 +22,7 @@
     "ClearSpam.Web": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "/Accounts/Index",
+      "launchUrl": "Accounts/Index",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

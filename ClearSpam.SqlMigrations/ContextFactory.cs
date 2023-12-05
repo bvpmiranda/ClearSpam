@@ -31,8 +31,7 @@ namespace ClearSpam.SqlMigrations
 
         public static DbContextOptions<Persistence.ClearSpamContext> GetOptions(string connectionString)
         {
-            var contextBuilder = new DbContextOptionsBuilder<Persistence.ClearSpamContext>()
-                .UseSqlServer(connectionString);
+            var contextBuilder = new DbContextOptionsBuilder<Persistence.ClearSpamContext>().UseMySQL(connectionString);
 
             return contextBuilder.Options;
         }
