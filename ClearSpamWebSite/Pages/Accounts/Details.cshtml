@@ -1,0 +1,121 @@
+﻿@page
+@model AccountDetails
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Account</h1>
+
+<div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="Account.Name" class="control-label"></label>
+                <input asp-for="Account.Name" class="form-control" readonly />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="Account.Server" class="control-label"></label>
+                <input asp-for="Account.Server" class="form-control" readonly />
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label asp-for="Account.Port" class="control-label"></label>
+                <input asp-for="Account.Port" class="form-control" readonly />
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group">
+                <label asp-for="Account.Ssl" class="control-label"></label>
+                <select asp-for="Account.Ssl" class="form-control" readonly disabled>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="Account.Login" class="control-label"></label>
+                <input asp-for="Account.Login" class="form-control" readonly />
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="Account.Password" class="control-label"></label>
+                <input asp-for="Account.Password" class="form-control" type="password" value="@Model.Account.Password" readonly />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="Account.WatchedMailbox" class="control-label"></label>
+                <input asp-for="Account.WatchedMailbox" class="form-control" readonly />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 col-lg-2 py-0 px-0">
+            <a asp-page="./Edit" asp-route-id="@Model.Account.Id" class="btn btn-primary btn-block">Edit</a>
+        </div>
+        <div class="col-6 col-lg-8">
+        </div>
+        <div class="col-3 col-lg-2 py-0 px-0">
+            <a href="#" onclick="processRules('Details?handler=ClearSpam', @Model.Account.Id); return false;" class="btn btn-secondary btn-block">Process Rules</a>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col py-0 px-0 text-left">
+            <h4>Rules</h4>
+        </div>
+        <div class="col py-0 px-0 text-right">
+            <a asp-page="../Rules/Create" asp-route-id="@Model.Account.Id" class="btn btn-dark">Create New Rule</a>
+        </div>
+    </div>
+</div>
+<br />
+<table class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
+        <tr class="d-flex">
+            <th class="col-2 col-lg-1 col-xl-1">
+                @Html.DisplayNameFor(model => model.Account.Rules.FirstOrDefault().Field)
+            </th>
+            <th class="col-8 col-lg-10 col-xl-10">
+                @Html.DisplayNameFor(model => model.Account.Rules.FirstOrDefault().Content)
+            </th>
+            <th class="col-2 col-lg-1 col-xl-1"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Account.Rules)
+        {
+            <tr class="d-flex">
+                <td class="col-2 col-lg-1 col-xl-1">
+                    <a asp-page="../Rules/Edit" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Field)</a>
+                </td>
+                <td class="col-8 col-lg-10 col-xl-10">
+                    <a asp-page="../Rules/Edit" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Content)</a>
+                </td>
+                <td class="col-2 col-lg-1 col-xl-1">
+                    <a asp-page="../Rules/Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

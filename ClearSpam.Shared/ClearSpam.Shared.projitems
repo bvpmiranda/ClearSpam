@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>0ddfda35-17f4-4161-aec6-888c7af92b6c</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>ClearSpam.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ClearSpamContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\Fields.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Account.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Field.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Rule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\SimpleAes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ClearSpamService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Cryptography.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IClearSpamService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ICryptography.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IImapService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ImapService.cs" />
+  </ItemGroup>
+</Project>
