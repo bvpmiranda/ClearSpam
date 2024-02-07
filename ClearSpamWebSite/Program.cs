@@ -33,7 +33,7 @@ namespace ClearSpam
             builder.Services.AddLogging(c => c.AddConsole());
 
             var connectionString = configuration.GetConnectionString("ClearSpam");
-            builder.Services.AddDbContext<ClearSpamContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+            builder.Services.AddDbContext<ClearSpamContext>(options => options.UseNpgsql(connectionString));
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ClearSpamContext>();

@@ -25,7 +25,7 @@ namespace ClearSpam
                     services.AddSingleton<IConfiguration>(configuration);
 
                     var connectionString = configuration.GetConnectionString("ClearSpam");
-                    services.AddDbContext<ClearSpamContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)), ServiceLifetime.Singleton);
+                    services.AddDbContext<ClearSpamContext>(options => options.UseNpgsql(connectionString), ServiceLifetime.Singleton);
 
                     services.AddSingleton<IClearSpamService, ClearSpamService>();
                     services.AddSingleton<ICryptography, Cryptography>();

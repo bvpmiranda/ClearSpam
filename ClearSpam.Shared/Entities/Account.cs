@@ -31,42 +31,51 @@ namespace ClearSpam.Entities
         {
             modelBuilder.Entity<Account>(entity =>
             {
-                entity.ToTable("Account");
+                entity.ToTable("account");
 
-                entity.Property(x => x.Id);
+                entity.Property(x => x.Id)
+                    .HasColumnName(nameof(Id).ToLower());
 
                 entity.Property(x => x.UserId)
+                    .HasColumnName(nameof(UserId).ToLower())
                     .IsRequired()
                     .HasMaxLength(450)
                     .IsUnicode(true);
 
                 entity.Property(x => x.Name)
+                    .HasColumnName(nameof(Name).ToLower())
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
                 entity.Property(x => x.Server)
+                    .HasColumnName(nameof(Server).ToLower())
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
                 entity.Property(x => x.Port)
+                    .HasColumnName(nameof(Port).ToLower())
                     .IsRequired();
 
                 entity.Property(x => x.Ssl)
+                    .HasColumnName(nameof(Ssl).ToLower())
                     .IsRequired();
 
                 entity.Property(x => x.Login)
+                    .HasColumnName(nameof(Login).ToLower())
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
                 entity.Property(x => x.Password)
+                    .HasColumnName(nameof(Password).ToLower())
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
                 entity.Property(x => x.WatchedMailbox)
+                    .HasColumnName(nameof(WatchedMailbox).ToLower())
                     .HasMaxLength(255)
                     .IsUnicode(false);
             });

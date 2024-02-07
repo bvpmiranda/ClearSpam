@@ -41,16 +41,22 @@ namespace ClearSpam.Entities
         {
             modelBuilder.Entity<Rule>(entity =>
             {
-                entity.ToTable("Rule");
+                entity.ToTable("rule");
 
-                entity.Property(x => x.Id);
+                entity.Property(x => x.Id)
+                    .HasColumnName(nameof(Id).ToLower());
+
+                entity.Property(x => x.AccountId)
+                    .HasColumnName(nameof(AccountId).ToLower());
 
                 entity.Property(x => x.Field)
+                    .HasColumnName(nameof(Field).ToLower())
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(x => x.Content)
+                    .HasColumnName(nameof(Content).ToLower())
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(true);
